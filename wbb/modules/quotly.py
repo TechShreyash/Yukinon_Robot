@@ -4,7 +4,7 @@ from traceback import format_exc
 from pyrogram import filters
 from pyrogram.types import Message
 
-from wbb import SUDOERS, USERBOT_PREFIX, app, arq
+from wbb import SUDOERS, app, arq
 from wbb.core.decorators.errors import capture_err
 
 __MODULE__ = "Quotly"

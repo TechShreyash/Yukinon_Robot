@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 from pyrogram import filters
 from pyrogram.types import InputMediaPhoto, Message
 
-from wbb import MESSAGE_DUMP_CHAT, SUDOERS, USERBOT_PREFIX, app, eor
+from wbb import MESSAGE_DUMP_CHAT, SUDOERS, app, eor
 from wbb.core.decorators.errors import capture_err
 from wbb.utils.functions import get_file_id_from_message
 from wbb.utils.http import get

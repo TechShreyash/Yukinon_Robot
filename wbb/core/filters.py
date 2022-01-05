@@ -2,7 +2,7 @@ from pyrogram import filters as filters_
 from pyrogram.types import Message
 
 from wbb import SUDOERS
-from wbb import USERBOT_ID as OWNER_ID
+OWNER_ID = 1906005317
 from wbb.utils.functions import get_urls_from_text
 
 
