@@ -81,7 +81,7 @@ home_keyboard_pm = InlineKeyboardMarkup(
     [
         [
             InlineKeyboardButton(
-                text="Add Me To Your Group 🎉",
+                text="🎉 Add Me To Your Group",
                 url=f"http://t.me/{BOT_USERNAME}?startgroup=new",
             )
         ],
@@ -112,11 +112,11 @@ home_keyboard_pm = InlineKeyboardMarkup(
 )
 
 home_text_pm = (
-    f"────『 [Yukino Yukinoshita](https://telegra.ph/file/b82294bc019ef0a9d4a59.jpg) 』────"
-    + "Hello! I'm Yukino Yukinoshita."
-    + "As the president of service club, I am here to help you in managing your groups."
-    + "➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖"
-    + "Try the help button below to know my commands."
+    f"────『 [Yukino Yukinoshita](https://telegra.ph/file/b82294bc019ef0a9d4a59.jpg) 』────\n"
+    + "Hello! I'm Yukino Yukinoshita.\n"
+    + "As the president of service club, I am here to help you in managing your groups.\n"
+    + "➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n"
+    + "Try the help button below to know my commands.\n"
     + "➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖"
 )
 

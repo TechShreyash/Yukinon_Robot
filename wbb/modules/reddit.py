@@ -3,7 +3,7 @@ from pyrogram import filters
 from wbb import app, arq
 from wbb.core.decorators.errors import capture_err
 
-__MODULE__ = "Reddit"
+__MODULE__ = "📛 Reddit"
 __HELP__ = "/reddit [query] - results something from reddit"
 
 

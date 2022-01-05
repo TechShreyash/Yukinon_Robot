@@ -3,7 +3,7 @@ from pyrogram.types import Message
 
 from wbb import SUDOERS, app
 
-__MODULE__ = "Dice"
+__MODULE__ = "🎲 Dice"
 __HELP__ = """
 /dice
     Roll a dice.

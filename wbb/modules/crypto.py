@@ -6,7 +6,7 @@ from wbb.core.keyboard import ikb
 from wbb.core.sections import section
 from wbb.utils.http import get
 
-__MODULE__ = "Crypto"
+__MODULE__ = "🧿 Crypto"
 __HELP__ = """
 /crypto [currency]
         Get Real Time value from currency given.

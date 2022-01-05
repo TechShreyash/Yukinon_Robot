@@ -11,7 +11,7 @@ from wbb.utils.http import get
 from wbb.utils.json_prettify import json_prettify
 from wbb.utils.pastebin import paste
 
-__MODULE__ = "Misc"
+__MODULE__ = "🎁 Misc"
 __HELP__ = """
 /ask
     Ask a question

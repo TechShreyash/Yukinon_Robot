@@ -12,7 +12,7 @@ from wbb.utils.dbfunctions import (alpha_to_int, get_karma, get_karmas,
 from wbb.utils.filter_groups import karma_negative_group, karma_positive_group
 from wbb.utils.functions import get_user_id_and_usernames
 
-__MODULE__ = "Karma"
+__MODULE__ = "🎭 Karma"
 __HELP__ = """[UPVOTE] - Use upvote keywords like "+", "+1", "thanks" etc to upvote a message.
 [DOWNVOTE] - Use downvote keywords like "-", "-1", etc to downvote a message.
 /karma_toggle [ENABLE|DISABLE] - Enable or Disable Karma System In Your Chat.

@@ -6,7 +6,7 @@ from wbb.core.decorators.errors import capture_err
 from wbb.utils.dbfunctions import (blacklist_chat, blacklisted_chats,
                                    whitelist_chat)
 
-__MODULE__ = "Blacklist Chat"
+__MODULE__ = "🛡 Blacklist Chat"
 __HELP__ = """
 **THIS MODULE IS ONLY FOR DEVS**
 

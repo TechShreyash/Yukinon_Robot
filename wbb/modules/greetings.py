@@ -21,7 +21,7 @@ from wbb.utils.dbfunctions import (captcha_off, captcha_on, del_welcome,
 from wbb.utils.filter_groups import welcome_captcha_group
 from wbb.utils.functions import extract_text_and_keyb, generate_captcha
 
-__MODULE__ = "Greetings"
+__MODULE__ = "🏵 Greetings"
 __HELP__ = """
 /captcha [ENABLE|DISABLE] - Enable/Disable captcha.
 

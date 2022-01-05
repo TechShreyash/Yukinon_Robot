@@ -11,7 +11,7 @@ from wbb.utils.dbfunctions import (add_warn, get_warn, int_to_alpha,
 from wbb.utils.functions import (extract_user, extract_user_and_reason,
                                  time_converter)
 
-__MODULE__ = "Admin"
+__MODULE__ = "🔆 Admin"
 __HELP__ = """/ban - Ban A User
 /dban - Delete the replied message banning its sender
 /tban - Ban A User For Specific Time

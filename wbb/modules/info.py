@@ -7,7 +7,7 @@ from wbb import SUDOERS, app
 from wbb.core.sections import section
 from wbb.utils.dbfunctions import is_gbanned_user, user_global_karma
 
-__MODULE__ = "Info"
+__MODULE__ = "🔮 Info"
 __HELP__ = """
 /info [USERNAME|ID] - Get info about a user.
 /chat_info [USERNAME|ID] - Get info about a chat.

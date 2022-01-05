@@ -10,7 +10,7 @@ from wbb.utils.dbfunctions import (delete_note, get_note, get_note_names,
                                    save_note)
 from wbb.utils.functions import extract_text_and_keyb
 
-__MODULE__ = "Notes"
+__MODULE__ = "📝 Notes"
 __HELP__ = """/notes To Get All The Notes In The Chat.
 
 /save [NOTE_NAME] To Save A Note (Can be a sticker or text).

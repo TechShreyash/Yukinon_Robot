@@ -11,7 +11,7 @@ from wbb.utils.dbfunctions import (delete_filter, get_filter,
 from wbb.utils.filter_groups import chat_filters_group
 from wbb.utils.functions import extract_text_and_keyb
 
-__MODULE__ = "Filters"
+__MODULE__ = "🪧 Filters"
 __HELP__ = """/filters To Get All The Filters In The Chat.
 /filter [FILTER_NAME] To Save A Filter (Can be a sticker or text).
 /stop [FILTER_NAME] To Stop A Filter.

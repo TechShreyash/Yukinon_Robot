@@ -5,7 +5,7 @@ from wbb.core.decorators.permissions import adminsOnly
 from wbb.utils.dbfunctions import (antiservice_off, antiservice_on,
                                    is_antiservice_on)
 
-__MODULE__ = "AntiService"
+__MODULE__ = "👁‍🗨 AntiService"
 __HELP__ = """
 Plugin to delete service messages in a chat!
 

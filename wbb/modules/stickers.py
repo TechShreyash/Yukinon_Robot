@@ -16,7 +16,7 @@ from wbb.utils.files import (get_document_from_file_id,
 from wbb.utils.stickerset import (add_sticker_to_set, create_sticker,
                                   create_sticker_set, get_sticker_set_by_name)
 
-__MODULE__ = "Stickers"
+__MODULE__ = "📸 Stickers"
 __HELP__ = """
 /sticker_id
     To get FileID of a Sticker.

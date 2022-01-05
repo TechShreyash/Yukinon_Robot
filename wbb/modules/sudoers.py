@@ -15,7 +15,7 @@ from wbb.utils.dbfunctions import (add_gban_user, get_served_chats,
                                    is_gbanned_user, remove_gban_user)
 from wbb.utils.functions import extract_user, extract_user_and_reason, restart
 
-__MODULE__ = "Sudoers"
+__MODULE__ = "🪛 Sudoers"
 __HELP__ = """
 /stats - To Check Bot's Global Stats.
 

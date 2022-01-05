@@ -5,7 +5,7 @@ from pyrogram import filters
 from wbb import app
 from wbb.core.decorators.permissions import adminsOnly
 
-__MODULE__ = "Admin Miscs"
+__MODULE__ = "🛂 Admin Miscs"
 __HELP__ = """
 /set_chat_title - Change The Name Of A Group/Channel.
 /set_chat_photo - Change The PFP Of A Group/Channel.
