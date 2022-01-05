@@ -87,13 +87,22 @@ home_keyboard_pm = InlineKeyboardMarkup(
         ],
         [
             InlineKeyboardButton(
+                text="🧰 Owner",
+                url="https://t.me/Tech_Shreyash",
+            ),
+            InlineKeyboardButton(
+                text="⚒ Logs", url="https://t.me/+wlPc4pPd7VFjMTI9"
+            ),
+        ],
+        [
+            InlineKeyboardButton(
                 text="📣 Updates Channel",
                 url="https://t.me/TechZBots",
             ),
             InlineKeyboardButton(
                 text="💬 Support", url="https://t.me/TechZBots_Support"
             ),
-        ],
+        ],        
         [            
             InlineKeyboardButton(
                 text="🔐 Help & Commands", callback_data="bot_commands"
