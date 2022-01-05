@@ -13,8 +13,6 @@ from wbb.utils.dbfunctions import (get_blacklist_filters_count,
                                    get_served_users, get_warns_count,
                                    remove_served_chat)
 from wbb.utils.http import get
-from wbb.utils.inlinefuncs import keywords_list
-
 
 @app.on_message(
     filters.command("clean_db") & filters.user(SUDOERS) & ~filters.edited
@@ -39,7 +37,7 @@ async def clean_db(_, message):
 
 
 @app.on_message(
-    filters.command("gstats") & filters.user(SUDOERS) & ~filters.edited
+    filters.command("stats") & filters.user(SUDOERS) & ~filters.edited
 )
 @capture_err
 async def global_stats(_, message):
@@ -85,8 +83,7 @@ async def global_stats(_, message):
 
     msg = f"""
 **Global Stats of {BOT_NAME}**:
-    **{modules_count}** Modules Loaded.
-    **{len(keywords_list)}** Inline Modules Loaded.
+    **{modules_count}** Modules Loaded.    
     **{rss_count}** Active RSS Feeds.
     **{gbans}** Globally banned users.
     **{filters_count}** Filters, Across **{filters_chats_count}** chats.
