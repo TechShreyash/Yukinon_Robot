@@ -83,6 +83,7 @@ async def global_stats(_, message):
 
     msg = f"""
 **Global Stats of {BOT_NAME}**:
+
     **{modules_count}** Modules Loaded.    
     **{rss_count}** Active RSS Feeds.
     **{gbans}** Globally banned users.

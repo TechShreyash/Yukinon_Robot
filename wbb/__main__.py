@@ -13,6 +13,12 @@ from wbb.utils import paginate_modules
 from wbb.utils.constants import MARKDOWN
 from wbb.utils.dbfunctions import clean_restart_stage
 
+# for stats in start message
+import time
+from wbb import (bot_start_time)
+from wbb.utils.dbfunctions import (get_served_chats, get_served_users)
+#end
+
 loop = asyncio.get_event_loop()
 
 HELPABLE = {}
@@ -75,7 +81,7 @@ async def start_bot():
         task.cancel()
     print("[INFO]: Turned off!")
 
-thumbnail1 = ""
+thumbnail1 = "https://telegra.ph/file/b82294bc019ef0a9d4a59.jpg"
 
 home_keyboard_pm = InlineKeyboardMarkup(
     [
@@ -112,12 +118,15 @@ home_keyboard_pm = InlineKeyboardMarkup(
 )
 
 home_text_pm = (
-    f"────『 [Yukino Yukinoshita](https://telegra.ph/file/b82294bc019ef0a9d4a59.jpg) 』────\n"
-    + "Hello! I'm Yukino Yukinoshita.\n"
-    + "As the president of service club, I am here to help you in managing your groups.\n"
-    + "➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖\n"
-    + "Try the help button below to know my commands.\n"
-    + "➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖"
+    f"**────『 Yukino Yukinoshita 』────**\n"
+    + "\n**Hello! {first_name},**\n"
+    + "**I'm Yukino Yukinoshita,**"
+    + "**The president of service club is here to help you in managing your groups.**\n"
+    + "**┏━━━━━━━━━━━━━━━━**\n"
+    + "**┣ ₪ Uptime:** `{uptime_time}`\n"
+    + "**┣ ₪** `{total_users}` **users, across** `{number_of_chats}` **chats**\n"
+    + "┗━━━━━━━━━━━━━━━━━\n"
+    + "✪ Try the help button below to know my commands.\n"
 )
 
 
@@ -144,6 +153,24 @@ keyboard = InlineKeyboardMarkup(
 
 @app.on_message(filters.command("start"))
 async def start(_, message):
+    # groups and user info in start
+
+    served_chats = len(await get_served_chats())
+    served_users = len(await get_served_users())
+    bot_uptime = int(time.time() - bot_start_time)
+    
+    home_text_private = home_text_pm
+
+    home_text_private = home_text_private.format(first_name=message.from_user.first_name,
+    uptime_time = bot_uptime,
+    total_users = served_users,
+    number_of_chats = served_chats,
+    )
+
+    #end
+
+
+    #do not edit this    
     if message.chat.type != "private":
         return await message.reply("Hello, Yukinon is here to help you[.](https://telegra.ph/file/b82294bc019ef0a9d4a59.jpg)", reply_markup=keyboard,parse_mode="markdown",disable_web_page_preview=False
         )
@@ -167,8 +194,8 @@ async def start(_, message):
                 reply_markup=keyb,
             )
     else:
-        await message.reply(home_text_pm,
-            reply_markup=home_keyboard_pm,parse_mode="markdown",disable_web_page_preview=False
+        await message.reply_photo(thumbnail1,caption=home_text_private,
+            reply_markup=home_keyboard_pm,parse_mode="markdown",disable_web_page_preview=True
         )
     return
 
@@ -233,7 +260,8 @@ async def help_parser(name, keyboard=None):
     if not keyboard:
         keyboard = InlineKeyboardMarkup(paginate_modules(0, HELPABLE, "help"))
     return (
-        """Hello {first_name}, My name is {bot_name}.
+        """**────『 Help & Commands 』────**\n\n
+Hello {first_name}, My name is {bot_name}.
 I'm a group management bot with some useful features.
 You can choose an option below, by clicking a button.
 Also you can ask anything in Support Group.
@@ -265,6 +293,23 @@ async def stats_callbacc(_, CallbackQuery):
 
 @app.on_callback_query(filters.regex(r"help_(.*?)"))
 async def help_button(client, query):
+    # groups and user info in start
+
+    served_chats = len(await get_served_chats())
+    served_users = len(await get_served_users())
+    bot_uptime = int(time.time() - bot_start_time)
+    
+    home_text_private = home_text_pm
+
+    home_text_private = home_text_private.format(first_name=query.from_user.first_name,
+    uptime_time = bot_uptime,
+    total_users = served_users,
+    number_of_chats = served_chats,
+    )
+
+    #end
+    
+
     home_match = re.match(r"help_home\((.+?)\)", query.data)
     mod_match = re.match(r"help_module\((.+?)\)", query.data)
     prev_match = re.match(r"help_prev\((.+?)\)", query.data)
@@ -298,9 +343,9 @@ General command are:
             disable_web_page_preview=True,
         )
     elif home_match:
-        await app.send_message(
-            query.from_user.id,
-            text=home_text_pm,
+        await app.send_photo(query.from_user.id,
+            photo=thumbnail1,
+            caption=home_text_private,
             reply_markup=home_keyboard_pm,
         )
         await query.message.delete()
