@@ -195,7 +195,7 @@ async def start(_, message):
             )
     else:
         await message.reply_photo(photo=thumbnail1,caption=home_text_private,
-            reply_markup=home_keyboard_pm,parse_mode="markdown",disable_web_page_preview=True
+            reply_markup=home_keyboard_pm,parse_mode="markdown",
         )
     return
 
@@ -260,9 +260,9 @@ async def help_parser(name, keyboard=None):
     if not keyboard:
         keyboard = InlineKeyboardMarkup(paginate_modules(0, HELPABLE, "help"))
     return (
-        """**────『 Help & Commands 』────**\n\n
+        """**────『 Help & Commands 』────**\n
 Hello {first_name}, My name is {bot_name}.
-I'm a group management bot with some useful features.\n
+I'm a group management bot with some useful features.
 ➤ Know my commands and features by clicking the buttons.
 """.format(
             first_name=name,
@@ -315,16 +315,11 @@ async def help_button(client, query):
     next_match = re.match(r"help_next\((.+?)\)", query.data)
     back_match = re.match(r"help_back", query.data)
     create_match = re.match(r"help_create", query.data)
-    top_text = f"""
+    top_text = f"""**────『 Help & Commands 』────**\n
 Hello {query.from_user.first_name}, My name is {BOT_NAME}.
 I'm a group management bot with some useful features.
-You can choose an option below, by clicking a button.
-Also you can ask anything in Support Group.
-
-General command are:
- - /start: Start the bot
- - /help: Give this message
- """
+➤ Know my commands and features by clicking the buttons.
+"""
     if mod_match:
         module = (mod_match.group(1)).replace(' ', '_')
         text = (
