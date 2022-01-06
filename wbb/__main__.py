@@ -119,10 +119,10 @@ home_keyboard_pm = InlineKeyboardMarkup(
 )
 
 home_text_pm = (
-    f"**───『 Yukino Yukinoshita 』───**\n"
-    + "\n**Hello! {first_name},**\n"
+    f"**──『 Yukino Yukinoshita 』──**\n"
+    + "**Hello! {first_name},**\n"
     + "**I'm Yukino Yukinoshita,**"
-    + "** The president of service club is here to help you in managing your groups.**\n"
+    + "** president of service club. I am here to help you in managing your groups.**\n"
     + "**┏━━━━━━━━━━━━━━━**\n"
     + "**┣ ₪ Uptime:** `{uptime_time}`\n"
     + "**┣ ₪** `{total_users}` **users, across** `{number_of_chats}` **chats**\n"
