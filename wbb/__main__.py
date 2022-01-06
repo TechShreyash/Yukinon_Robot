@@ -17,6 +17,7 @@ from wbb.utils.dbfunctions import clean_restart_stage
 import time
 from wbb import (bot_start_time)
 from wbb.utils.dbfunctions import (get_served_chats, get_served_users)
+from wbb.utils import formatter
 #end
 
 loop = asyncio.get_event_loop()
@@ -118,14 +119,14 @@ home_keyboard_pm = InlineKeyboardMarkup(
 )
 
 home_text_pm = (
-    f"**────『 Yukino Yukinoshita 』────**\n"
+    f"**───『 Yukino Yukinoshita 』───**\n"
     + "\n**Hello! {first_name},**\n"
     + "**I'm Yukino Yukinoshita,**"
-    + "**The president of service club is here to help you in managing your groups.**\n"
-    + "**┏━━━━━━━━━━━━━━━━**\n"
+    + "** The president of service club is here to help you in managing your groups.**\n"
+    + "**┏━━━━━━━━━━━━━━━**\n"
     + "**┣ ₪ Uptime:** `{uptime_time}`\n"
     + "**┣ ₪** `{total_users}` **users, across** `{number_of_chats}` **chats**\n"
-    + "┗━━━━━━━━━━━━━━━━━\n"
+    + "**┗━━━━━━━━━━━━━━━**\n"
     + "✪ Try the help button below to know my commands.\n"
 )
 
@@ -162,7 +163,7 @@ async def start(_, message):
     home_text_private = home_text_pm
 
     home_text_private = home_text_private.format(first_name=message.from_user.first_name,
-    uptime_time = bot_uptime,
+    uptime_time = formatter.get_readable_time((bot_uptime)),
     total_users = served_users,
     number_of_chats = served_chats,
     )
@@ -261,8 +262,8 @@ async def help_parser(name, keyboard=None):
         keyboard = InlineKeyboardMarkup(paginate_modules(0, HELPABLE, "help"))
     return (
         """**────『 Help & Commands 』────**\n
-Hello {first_name}, My name is {bot_name}.
-I'm a group management bot with some useful features.
+**Hello {first_name}, My name is {bot_name}.**
+**I'm a group management bot with some useful features.**
 ➤ Know my commands and features by clicking the buttons.
 """.format(
             first_name=name,
@@ -301,7 +302,7 @@ async def help_button(client, query):
     home_text_private = home_text_pm
 
     home_text_private = home_text_private.format(first_name=query.from_user.first_name,
-    uptime_time = bot_uptime,
+    uptime_time = formatter.get_readable_time((bot_uptime)),
     total_users = served_users,
     number_of_chats = served_chats,
     )
@@ -316,10 +317,16 @@ async def help_button(client, query):
     back_match = re.match(r"help_back", query.data)
     create_match = re.match(r"help_create", query.data)
     top_text = f"""**────『 Help & Commands 』────**\n
-Hello {query.from_user.first_name}, My name is {BOT_NAME}.
-I'm a group management bot with some useful features.
+**Hello first_name_11, My name is {BOT_NAME}.**
+**I'm a group management bot with some useful features.**
 ➤ Know my commands and features by clicking the buttons.
 """
+
+    a = top_text
+    b = query.from_user.first_name
+    a = a.replace("first_name_11",b)
+    top_text = a
+
     if mod_match:
         module = (mod_match.group(1)).replace(' ', '_')
         text = (
