@@ -7,7 +7,7 @@ from wbb import (BOT_ID, SUDOERS, app, arq, eor)
 from wbb.core.decorators.errors import capture_err
 from wbb.utils.filter_groups import chatbot_group
 
-__MODULE__ = "💭 ChatBot"
+__MODULE__ = "ChatBot 💭"
 __HELP__ = """
 /chatbot [ENABLE|DISABLE] To Enable Or Disable ChatBot In Your Chat.
 """

@@ -10,7 +10,7 @@ from wbb.core.decorators.errors import capture_err
 from wbb.core.keyboard import ikb
 from wbb.utils.pastebin import paste
 
-__MODULE__ = "🧩 Paste"
+__MODULE__ = "Paste 🧩"
 __HELP__ = "/paste - To Paste Replied Text Or Document To A Pastebin"
 pattern = re.compile(r"^text/|json$|yaml$|xml$|toml$|x-sh$|x-shellscript$")
 

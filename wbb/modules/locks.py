@@ -8,7 +8,7 @@ from wbb.core.decorators.permissions import adminsOnly
 from wbb.modules.admin import current_chat_permissions, list_admins
 from wbb.utils.functions import get_urls_from_text
 
-__MODULE__ = "🔒 Locks"
+__MODULE__ = "Locks 🔒"
 __HELP__ = """
 Commands: /lock | /unlock | /locks [No Parameters Required]
 

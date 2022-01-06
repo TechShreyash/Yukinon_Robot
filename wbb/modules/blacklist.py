@@ -13,7 +13,7 @@ from wbb.utils.dbfunctions import (delete_blacklist_filter,
                                    save_blacklist_filter)
 from wbb.utils.filter_groups import blacklist_filters_group
 
-__MODULE__ = "⚔️ Blacklist"
+__MODULE__ = "Blacklist ⚔️"
 __HELP__ = """
 /blacklisted - Get All The Blacklisted Words In The Chat.
 /blacklist [WORD|SENTENCE] - Blacklist A Word Or A Sentence.

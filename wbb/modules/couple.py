@@ -7,7 +7,7 @@ from wbb import app
 from wbb.core.decorators.errors import capture_err
 from wbb.utils.dbfunctions import get_couple, save_couple
 
-__MODULE__ = "❤️ Couples"
+__MODULE__ = "Couples ❤️"
 __HELP__ = "/couple or /couples - To Choose Couple Of The Day"
 
 

@@ -194,7 +194,7 @@ async def start(_, message):
                 reply_markup=keyb,
             )
     else:
-        await message.reply_photo(thumbnail1,caption=home_text_private,
+        await message.reply_photo(photo=thumbnail1,caption=home_text_private,
             reply_markup=home_keyboard_pm,parse_mode="markdown",disable_web_page_preview=True
         )
     return
@@ -262,9 +262,8 @@ async def help_parser(name, keyboard=None):
     return (
         """**────『 Help & Commands 』────**\n\n
 Hello {first_name}, My name is {bot_name}.
-I'm a group management bot with some useful features.
-You can choose an option below, by clicking a button.
-Also you can ask anything in Support Group.
+I'm a group management bot with some useful features.\n
+➤ Know my commands and features by clicking the buttons.
 """.format(
             first_name=name,
             bot_name=BOT_NAME,

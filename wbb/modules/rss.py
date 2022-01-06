@@ -10,7 +10,7 @@ from wbb.utils.dbfunctions import (add_rss_feed, get_rss_feeds, is_rss_active,
 from wbb.utils.functions import get_http_status_code, get_urls_from_text
 from wbb.utils.rss import Feed
 
-__MODULE__ = "🌐 RSS"
+__MODULE__ = "RSS 🌐"
 __HELP__ = f"""
 /add_feed [URL] - Add a feed to chat
 /rm_feed - Remove feed from chat
