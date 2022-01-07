@@ -21,6 +21,11 @@ from wbb.utils.dbfunctions import (captcha_off, captcha_on, del_welcome,
 from wbb.utils.filter_groups import welcome_captcha_group
 from wbb.utils.functions import extract_text_and_keyb, generate_captcha
 
+# added by techz bots
+
+from .welcome import DEFAULT_WELCOME_MESSAGES
+import random
+
 __MODULE__ = "Greetings 🏵"
 __HELP__ = """
 /captcha [ENABLE|DISABLE] - Enable/Disable captcha.
@@ -181,7 +186,18 @@ async def send_welcome_message(chat: Chat, user_id: int):
     raw_text = await get_welcome(chat.id)
 
     if not raw_text:
-        return
+        # added welcome messages when no saved message was found
+        welcome_msg = random.choice(DEFAULT_WELCOME_MESSAGES)
+
+        if "{first}" in welcome_msg:
+            welcome_msg = welcome_msg.replace("{first}", (await app.get_users(user_id)).mention)
+
+        await app.send_message(
+        chat.id,
+        text=welcome_msg,        
+        disable_web_page_preview=True,)
+        
+        
 
     text, keyb = extract_text_and_keyb(ikb, raw_text)
 
@@ -330,7 +346,7 @@ async def captcha_state(_, message):
 # WELCOME MESSAGE
 
 
-@app.on_message(filters.command("set_welcome") & ~filters.private)
+@app.on_message(filters.command(["set_welcome","setwelcome"]) & ~filters.private)
 @adminsOnly("can_change_info")
 async def set_welcome_func(_, message):
     usage = "You need to reply to a text, check the Greetings module in /help"
@@ -348,7 +364,7 @@ async def set_welcome_func(_, message):
     await message.reply_text("Welcome message has been successfully set.")
 
 
-@app.on_message(filters.command("del_welcome") & ~filters.private)
+@app.on_message(filters.command(["del_welcome","delwelcome"]) & ~filters.private)
 @adminsOnly("can_change_info")
 async def del_welcome_func(_, message):
     chat_id = message.chat.id
@@ -356,7 +372,7 @@ async def del_welcome_func(_, message):
     await message.reply_text("Welcome message has been deleted.")
 
 
-@app.on_message(filters.command("get_welcome") & ~filters.private)
+@app.on_message(filters.command(["get_welcome","getwelcome"]) & ~filters.private)
 @adminsOnly("can_change_info")
 async def get_welcome_func(_, message):
     chat = message.chat
