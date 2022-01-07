@@ -3,7 +3,7 @@ from pyrogram.types import Message
 
 from wbb import SUDOERS, app
 
-__MODULE__ = "Fun 🎁"
+__MODULE__ = "Games 🎁"
 __HELP__ = """
 Use these commands and try to score.\n\n
 /dice - Dice 🎲\n
