@@ -230,7 +230,7 @@ async def send_defaultwelcome(client,message:Message):
         if "{first}" in welcome_msg:
             welcome_msg = welcome_msg.replace("{first}", message.from_user.first_name)
 
-        await app.reply_text(welcome_msg)
+        await app.send_message(message.chat.id,text=welcome_msg,reply_to_message_id=message.message_id)
 
 @app.on_message(filters.left_chat_member)
 @capture_err
@@ -240,4 +240,4 @@ async def send_defaultgoodbye(client,message:Message):
     if "{first}" in goodbye_msg:
         goodbye_msg = goodbye_msg.replace("{first}", message.from_user.first_name)
 
-    await app.reply_text(goodbye_msg)
+    await app.send_message(message.chat.id,text=goodbye_msg,reply_to_message_id=message.message_id)
