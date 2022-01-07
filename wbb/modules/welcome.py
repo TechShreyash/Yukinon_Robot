@@ -224,7 +224,7 @@ import random
 @app.on_message(filters.new_chat_members)
 @capture_err
 async def send_defaultwelcome(client,message:Message):    
-    if await is_captcha_on(message.chat.id):
+    if not await is_captcha_on(message.chat.id):
         welcome_msg = random.choice(DEFAULT_WELCOME_MESSAGES)
 
         if "{first}" in welcome_msg:
