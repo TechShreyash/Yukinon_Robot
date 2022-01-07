@@ -223,7 +223,7 @@ import random
 
 @app.on_message(filters.new_chat_members)
 @capture_err
-async def send_defaultwelcome(message):    
+async def send_defaultwelcome(client,message:Message):    
     if not await is_captcha_on(message.chat.id):
         welcome_msg = random.choice(DEFAULT_WELCOME_MESSAGES)
 
@@ -234,7 +234,7 @@ async def send_defaultwelcome(message):
 
 @app.on_message(filters.left_chat_member)
 @capture_err
-async def send_defaultgoodbye(message):    
+async def send_defaultgoodbye(client,message:Message):    
     if not await is_captcha_on(message.chat.id):
         goodbye_msg = random.choice(DEFAULT_GOODBYE_MESSAGES)
 

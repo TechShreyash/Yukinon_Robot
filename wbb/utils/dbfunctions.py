@@ -417,22 +417,22 @@ async def save_couple(chat_id: int, date: str, couple: dict):
 async def is_captcha_on(chat_id: int) -> bool:
     chat = await captchadb.find_one({"chat_id": chat_id})
     if not chat:
-        return True
-    return False
+        return False
+    return True
 
 
 async def captcha_on(chat_id: int):
     is_captcha = await is_captcha_on(chat_id)
     if is_captcha:
         return
-    return await captchadb.delete_one({"chat_id": chat_id})
+    return await captchadb.insert_one({"chat_id": chat_id})
 
 
 async def captcha_off(chat_id: int):
     is_captcha = await is_captcha_on(chat_id)
     if not is_captcha:
         return
-    return await captchadb.insert_one({"chat_id": chat_id})
+    return await captchadb.delete_one({"chat_id": chat_id})
 
 
 async def has_solved_captcha_once(chat_id: int, user_id: int):
