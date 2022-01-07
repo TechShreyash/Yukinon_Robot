@@ -88,31 +88,31 @@ home_keyboard_pm = InlineKeyboardMarkup(
     [
         [
             InlineKeyboardButton(
-                text="🎉 Add Me To Your Group",
+                text="Add Me To Your Group 🎉",
                 url=f"http://t.me/{BOT_USERNAME}?startgroup=new",
             )
         ],
         [
             InlineKeyboardButton(
-                text="🧰 Owner",
+                text="Owner 🧰",
                 url="https://t.me/Tech_Shreyash",
             ),
             InlineKeyboardButton(
-                text="⚒ Logs", url="https://t.me/+wlPc4pPd7VFjMTI9"
+                text="Logs ⚒", url="https://t.me/+wlPc4pPd7VFjMTI9"
             ),
         ],
         [
             InlineKeyboardButton(
-                text="📣 Updates Channel",
+                text="Updates Channel 📣",
                 url="https://t.me/TechZBots",
             ),
             InlineKeyboardButton(
-                text="💬 Support", url="https://t.me/TechZBots_Support"
+                text="Support 💬", url="https://t.me/TechZBots_Support"
             ),
         ],        
         [            
             InlineKeyboardButton(
-                text="🔐 Help & Commands", callback_data="bot_commands"
+                text="Help & Commands 🔐", callback_data="bot_commands"
             )
         ],
     ]
@@ -120,9 +120,9 @@ home_keyboard_pm = InlineKeyboardMarkup(
 
 home_text_pm = (
     f"**──『 Yukino Yukinoshita 』──**\n"
-    + "**Hello! {first_name},**\n"
+    + "**Hello! {first_name}, **"
     + "**I'm Yukino Yukinoshita,**"
-    + "** president of service club. I am here to help you in managing your groups.**\n"
+    + "** president of service club.** \n**I am here to help you in managing your groups.**\n"
     + "**┏━━━━━━━━━━━━━━━**\n"
     + "**┣ ₪ Uptime:** `{uptime_time}`\n"
     + "**┣ ₪** `{total_users}` **users, across** `{number_of_chats}` **chats**\n"
@@ -135,16 +135,16 @@ keyboard = InlineKeyboardMarkup(
     [        
         [
             InlineKeyboardButton(
-                text="📣 Updates Channel",
+                text="Updates Channel 📣",
                 url="https://t.me/TechZBots",
             ),
             InlineKeyboardButton(
-                text="💬 Support", url="https://t.me/TechZBots_Support"
+                text="Support 💬", url="https://t.me/TechZBots_Support"
             ),
         ],
         [
             InlineKeyboardButton(
-                text="🔐 Help & Commands",
+                text="Help & Commands 🔐",
                 url=f"t.me/{BOT_USERNAME}?start=help",
             ),            
         ],
