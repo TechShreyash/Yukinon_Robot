@@ -149,3 +149,96 @@ DEFAULT_WELCOME_MESSAGES = [
     "Bond. {first} Bond.",
     "Come with me if you want to live",
 ]
+
+DEFAULT_GOODBYE_MESSAGES = [
+    "{first} will be missed.",
+    "{first} just went offline.",
+    "{first} has left the lobby.",
+    "{first} has left the clan.",
+    "{first} has left the game.",
+    "{first} has fled the area.",
+    "{first} is out of the running.",
+    "Nice knowing ya, {first}!",
+    "It was a fun time {first}.",
+    "We hope to see you again soon, {first}.",
+    "I donut want to say goodbye, {first}.",
+    "Goodbye {first}! Guess who's gonna miss you :')",
+    "Goodbye {first}! It's gonna be lonely without ya.",
+    "Please don't leave me alone in this place, {first}!",
+    "Good luck finding better shit-posters than us, {first}!",
+    "You know we're gonna miss you {first}. Right? Right? Right?",
+    "Congratulations, {first}! You're officially free of this mess.",
+    "{first}. You were an opponent worth fighting.",
+    "You're leaving, {first}? Yare Yare Daze.",
+    "Bring him the photo",
+    "Go outside!",
+    "Ask again later",
+    "Think for yourself",
+    "Question authority",
+    "You are worshiping a sun god",
+    "Don't leave the house today",
+    "Give up!",
+    "Marry and reproduce",
+    "Stay asleep",
+    "Wake up",
+    "Look to la luna",
+    "Steven lives",
+    "Meet strangers without prejudice",
+    "A hanged man will bring you no luck today",
+    "What do you want to do today?",
+    "You are dark inside",
+    "Have you seen the exit?",
+    "Get a baby pet it will cheer you up.",
+    "Your princess is in another castle.",
+    "You are playing it wrong give me the controller",
+    "Trust good people",
+    "Live to die.",
+    "When life gives you lemons reroll!",
+    "Well, that was worthless",
+    "I fell asleep!",
+    "May your troubles be many",
+    "Your old life lies in ruin",
+    "Always look on the bright side",
+    "It is dangerous to go alone",
+    "You will never be forgiven",
+    "You have nobody to blame but yourself",
+    "Only a sinner",
+    "Use bombs wisely",
+    "Nobody knows the troubles you have seen",
+    "You look fat you should exercise more",
+    "Follow the zebra",
+    "Why so blue?",
+    "The devil in disguise",
+    "Go outside",
+    "Always your head in the clouds",
+]
+
+from pyrogram import filters
+from pyrogram.types import Message
+
+from wbb import MESSAGE_DUMP_CHAT, SUDOERS, app, eor
+from wbb.core.decorators.errors import capture_err
+from wbb.utils.dbfunctions import (is_captcha_on,)
+import random
+
+@app.on_message(filters.new_chat_members)
+@capture_err
+async def send_default_welcome(message: Message):    
+    if not await is_captcha_on(message.chat.id):
+        welcome_msg = random.choice(DEFAULT_WELCOME_MESSAGES)
+
+        if "{first}" in welcome_msg:
+            welcome_msg = welcome_msg.replace("{first}", message.from_user.first_name)
+
+        await app.reply_text(welcome_msg)
+
+@app.on_message(filters.left_chat_member)
+@capture_err
+async def send_default_goodbye(message: Message):    
+    if not await is_captcha_on(message.chat.id):
+        goodbye_msg = random.choice(DEFAULT_GOODBYE_MESSAGES)
+
+        if "{first}" in goodbye_msg:
+            goodbye_msg = goodbye_msg.replace("{first}", message.from_user.first_name)
+
+        await app.reply_text(goodbye_msg)
