@@ -17,7 +17,7 @@ SUDO_USERS_ID = [
 ]  # Sudo users have full access to everything, don't trust anyone
 LOG_GROUP_ID = -1001615868326
 GBAN_LOG_GROUP_ID = -1001615868326
-MESSAGE_DUMP_CHAT = -1001615868326
+MESSAGE_DUMP_CHAT = -1001704010414
 WELCOME_DELAY_KICK_SEC = 600
 MONGO_URL = "mongodb+srv://yukino:yukinon@cluster0.vrlpf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 ARQ_API_KEY = "KBSFBD-AJYHUP-NUFRSH-BFNHZY-ARQ"
