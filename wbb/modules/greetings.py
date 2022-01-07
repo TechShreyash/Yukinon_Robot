@@ -194,8 +194,7 @@ async def send_welcome_message(chat: Chat, user_id: int):
 
         await app.send_message(
         chat.id,
-        text=welcome_msg,        
-        disable_web_page_preview=True,)
+        text=welcome_msg,)
         
         
 
@@ -364,7 +363,7 @@ async def set_welcome_func(_, message):
     await message.reply_text("Welcome message has been successfully set.")
 
 
-@app.on_message(filters.command(["del_welcome","delwelcome"]) & ~filters.private)
+@app.on_message(filters.command(["del_welcome","delwelcome","resetwelcome","reset_welcome"]) & ~filters.private)
 @adminsOnly("can_change_info")
 async def del_welcome_func(_, message):
     chat_id = message.chat.id
