@@ -192,15 +192,7 @@ async def inline_query_handler(client, query):
             answerss = await speedtest_init(query)
             return await client.answer_inline_query(
                 query.id, results=answerss, cache_time=2
-            )
-
-        elif text.split()[0] == "pmpermit":
-            user_id = query.from_user.id
-            victim = text.split()[1]
-            answerss = await pmpermit_func(answers, user_id, victim)
-            await client.answer_inline_query(
-                query.id, results=answerss, cache_time=2
-            )
+            )        
 
         elif text.split()[0] == "ping":
             answerss = await ping_func(answers)
@@ -277,5 +269,4 @@ async def inline_query_handler(client, query):
             )
 
     except Exception as e:
-        e = traceback.format_exc()
-        print(e, " InLine")
+        pass
