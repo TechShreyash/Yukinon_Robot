@@ -116,9 +116,9 @@ async def reverse_image_search(client, message: Message):
                 for i in messages
             ]
         )
-    except Exception:
-        pass
-
+    except Exception as e:
+        print(e)
+        
     await m.edit(
         text,
         disable_web_page_preview=True,
