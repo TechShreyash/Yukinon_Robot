@@ -40,7 +40,7 @@ from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
                             InputTextMessageContent)
 from search_engine_parser import GoogleSearch
 
-from wbb import (BOT_USERNAME, MESSAGE_DUMP_CHAT, SUDOERS, USERBOT_ID, app, arq)
+from wbb import (BOT_USERNAME, MESSAGE_DUMP_CHAT, SUDOERS, app, arq)
 from wbb.core.keyboard import ikb
 from wbb.core.tasks import _get_tasks_text, all_tasks, rm_task
 from wbb.core.types import InlineQueryResultCachedDocument
@@ -440,40 +440,6 @@ async def test_speedtest_cq(_, cq):
 **Longitude:** `{info['lon']}`
 """
     await app.edit_inline_text(inline_message_id, msg)
-
-
-async def pmpermit_func(answers, user_id, victim):
-    if user_id != USERBOT_ID:
-        return
-    caption = f"Hi, I'm  What are you here for?, You'll be blocked if you send more than 5 messages."
-    buttons = InlineKeyboard(row_width=2)
-    buttons.add(
-        InlineKeyboardButton(
-            text="To Scam You", callback_data="pmpermit to_scam_you a"
-        ),
-        InlineKeyboardButton(
-            text="For promotion",
-            callback_data="pmpermit to_scam_you a",
-        ),
-        InlineKeyboardButton(
-            text="Approve me", callback_data="pmpermit approve_me a"
-        ),
-        InlineKeyboardButton(
-            text="Approve", callback_data=f"pmpermit approve {victim}"
-        ),
-        InlineKeyboardButton(
-            text="Block & Delete",
-            callback_data=f"pmpermit block {victim}",
-        ),
-    )
-    answers.append(
-        InlineQueryResultArticle(
-            title="do_not_click_here",
-            reply_markup=buttons,
-            input_message_content=InputTextMessageContent(caption),
-        )
-    )
-    return answers
 
 
 async def ping_func(answers):
