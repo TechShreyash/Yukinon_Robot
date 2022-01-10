@@ -45,7 +45,6 @@ from wbb.core.keyboard import ikb
 from wbb.core.tasks import _get_tasks_text, all_tasks, rm_task
 from wbb.core.types import InlineQueryResultCachedDocument
 from wbb.modules.info import get_chat_info, get_user_info
-from wbb.modules.music import download_youtube_audio
 from wbb.utils.functions import test_speedtest
 from wbb.utils.pastebin import paste
 
@@ -325,37 +324,6 @@ async def youtube_func(answers, text):
         )
     return answers
 
-
-async def lyrics_func(answers, text):
-    song = await arq.lyrics(text)
-    if not song.ok:
-        answers.append(
-            InlineQueryResultArticle(
-                title="Error",
-                description=song.result,
-                input_message_content=InputTextMessageContent(song.result),
-            )
-        )
-        return answers
-    lyrics = song.result
-    song = lyrics.splitlines()
-    song_name = song[0]
-    artist = song[1]
-    if len(lyrics) > 4095:
-        lyrics = await paste(lyrics)
-        lyrics = f"**LYRICS_TOO_LONG:** [URL]({lyrics})"
-
-    msg = f"__{lyrics}__"
-
-    answers.append(
-        InlineQueryResultArticle(
-            title=song_name,
-            description=artist,
-            input_message_content=InputTextMessageContent(msg),
-        )
-    )
-    return answers
-
 async def wiki_func(answers, text):
     data = await arq.wiki(text)
     if not data.ok:
@@ -447,44 +415,6 @@ async def ping_func(answers):
         )
     )
     return answers
-
-
-async def yt_music_func(answers, url):
-    arq_resp = await arq.youtube(url)
-    loop = asyncio.get_running_loop()
-    music = await loop.run_in_executor(None, download_youtube_audio, arq_resp)
-    if not music:
-        msg = "**ERROR**\n__MUSIC TOO LONG__"
-        answers.append(
-            InlineQueryResultArticle(
-                title="ERROR",
-                description="MUSIC TOO LONG",
-                input_message_content=InputTextMessageContent(msg),
-            )
-        )
-        return answers
-    (
-        title,
-        performer,
-        duration,
-        audio,
-        thumbnail,
-    ) = music
-    m = await app.send_audio(
-        MESSAGE_DUMP_CHAT,
-        audio,
-        title=title,
-        duration=duration,
-        performer=performer,
-        thumb=thumbnail,
-    )
-    os.remove(audio)
-    os.remove(thumbnail)
-    answers.append(
-        InlineQueryResultCachedDocument(title=title, file_id=m.audio.file_id)
-    )
-    return answers
-
 
 async def info_inline_func(answers, peer):
     not_found = InlineQueryResultArticle(
