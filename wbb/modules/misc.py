@@ -1,3 +1,26 @@
+"""
+MIT License
+
+Copyright (c) 2021 TheHamkerCat
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+"""
 import secrets
 import string
 from asyncio import Lock
@@ -13,7 +36,7 @@ from wbb.utils.pastebin import paste
 
 __MODULE__ = "Misc ⚜️"
 __HELP__ = """
-/ask
+/asq
     Ask a question
 
 /commit
@@ -62,13 +85,16 @@ __HELP__ = """
 /markdownhelp
     Sends mark down and formatting help.
 
+/backup
+    Backup database
+
 #RTFM - Tell noobs to read the manual
 """
 
 ASQ_LOCK = Lock()
 
 
-@app.on_message(filters.command("ask") & ~filters.edited)
+@app.on_message(filters.command("asq") & ~filters.edited)
 async def asq(_, message):
     err = "Reply to text message or pass the question as argument"
     if message.reply_to_message:
@@ -104,6 +130,7 @@ async def rtfm(_, message):
 async def runs(_, message):
     await message.reply_text((await random_line("wbb/utils/runs.txt")))
 
+
 @app.on_message(filters.command("id"))
 async def getid(client, message):
     chat = message.chat
@@ -127,10 +154,11 @@ async def getid(client, message):
 
     text += f"**[Chat ID:](https://t.me/{chat.username})** `{chat.id}`\n\n"
     if not getattr(reply, "empty", True):
+        id_ = reply.from_user.id if reply.from_user else reply.sender_chat.id
         text += (
             f"**[Replied Message ID:]({reply.link})** `{reply.message_id}`\n"
         )
-        text += f"**[Replied User ID:](tg://user?id={reply.from_user.id})** `{reply.from_user.id}`"
+        text += f"**[Replied User ID:](tg://user?id={id_})** `{id_}`"
 
     await eor(
         message,

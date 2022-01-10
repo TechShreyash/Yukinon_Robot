@@ -21,43 +21,35 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-import traceback
-from asyncio import get_running_loop
-from io import BytesIO
+from os import remove
+from os import system as execute
 
-from googletrans import Translator
-from gtts import gTTS
 from pyrogram import filters
 from pyrogram.types import Message
 
-from wbb import app
+from wbb import MONGO_URL, SUDOERS, app
 
 
-def convert(text):
-    audio = BytesIO()
-    i = Translator().translate(text, dest="en")
-    lang = i.src
-    tts = gTTS(text, lang=lang)
-    audio.name = lang + ".mp3"
-    tts.write_to_fp(audio)
-    return audio
+@app.on_message(filters.command("backup") & filters.user(SUDOERS))
+async def backup(_, message: Message):
+    if message.chat.type != "private":
+        return await message.reply("This command can only be used in private")
 
+    m = await message.reply("Backing up data...")
 
-@app.on_message(filters.command("tts"))
-async def text_to_speech(_, message: Message):
-    if not message.reply_to_message:
-        return await message.reply_text("Reply to some text ffs.")
-    if not message.reply_to_message.text:
-        return await message.reply_text("Reply to some text ffs.")
-    m = await message.reply_text("Processing")
-    text = message.reply_to_message.text
-    try:
-        loop = get_running_loop()
-        audio = await loop.run_in_executor(None, convert, text)
-        await message.reply_audio(audio)
-        await m.delete()
-        audio.close()
-    except Exception as e:
-        await m.edit(e)
-        e = traceback.format_exc()
-        print(e)
+    code = execute(f'mongodump --uri "{MONGO_URL}"')
+    if int(code) != 0:
+        return await m.edit(
+            "Looks like you don't have mongo-database-tools installed "
+            + "grab it from mongodb.com/try/download/database-tools"
+        )
+
+    code = execute("zip backup.zip -r9 dump/*")
+    if int(code) != 0:
+        return await m.edit(
+            "Looks like you don't have `zip` package installed, BACKUP FAILED!"
+        )
+
+    await message.reply_document("backup.zip")
+    await m.delete()
+    remove("backup.zip")

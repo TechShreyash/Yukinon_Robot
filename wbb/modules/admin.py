@@ -1,3 +1,26 @@
+"""
+MIT License
+
+Copyright (c) 2021 TheHamkerCat
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+"""
 import asyncio
 
 from pyrogram import filters
@@ -194,7 +217,8 @@ async def kickFunc(_, message: Message):
 )
 @adminsOnly("can_restrict_members")
 async def banFunc(_, message: Message):
-    user_id, reason = await extract_user_and_reason(message)
+    user_id, reason = await extract_user_and_reason(message, sender_chat=True)
+
     if not user_id:
         return await message.reply_text("I can't find that user.")
     if user_id == BOT_ID:
@@ -209,7 +233,16 @@ async def banFunc(_, message: Message):
         return await message.reply_text(
             "I can't ban an admin, You know the rules, so do i."
         )
-    mention = (await app.get_users(user_id)).mention
+
+    try:
+        mention = (await app.get_users(user_id)).mention
+    except IndexError:
+        mention = (
+            message.reply_to_message.sender_chat.title
+            if message.reply_to_message
+            else "Anon"
+        )
+
     msg = (
         f"**Banned User:** {mention}\n"
         f"**Banned By:** {message.from_user.mention if message.from_user else 'Anon'}\n"
@@ -309,12 +342,12 @@ async def promoteFunc(_, message: Message):
 
     await message.chat.promote_member(
         user_id=user_id,
-        can_change_info=bot.can_change_info,
+        can_change_info=False,
         can_invite_users=bot.can_invite_users,
         can_delete_messages=bot.can_delete_messages,
         can_restrict_members=False,
-        can_pin_messages=bot.can_pin_messages,
-        can_promote_members=bot.can_promote_members,
+        can_pin_messages=False,
+        can_promote_members=False,
         can_manage_chat=bot.can_manage_chat,
         can_manage_voice_chats=bot.can_manage_voice_chats,
     )
@@ -424,6 +457,11 @@ async def mute(_, message: Message):
     await message.reply_text(msg, reply_markup=keyboard)
 
 
+@app.on_message(filters.command(["zombies","zombie"]) & ~filters.private)
+@adminsOnly("can_restrict_members")
+async def ban_deleted_accounts(_, message: Message):
+    await message.reply_text("Use /ban_ghosts to remove deleted accounts from this chat.")
+
 # Unmute members
 
 
@@ -461,10 +499,6 @@ async def ban_deleted_accounts(_, message: Message):
     else:
         await message.reply_text("There are no deleted accounts in this chat")
 
-@app.on_message(filters.command(["zombies","zombie"]) & ~filters.private)
-@adminsOnly("can_restrict_members")
-async def ban_deleted_accounts(_, message: Message):
-    await message.reply_text("Use /ban_ghosts to remove deleted accounts from this chat.")
 
 @app.on_message(
     filters.command(["warn", "dwarn"]) & ~filters.edited & ~filters.private
@@ -590,30 +624,35 @@ async def check_warns(_, message: Message):
 # Report
 
 
-@app.on_message((filters.command("report")
-                 | filters.command(["admins", "admin"], prefixes="@"))
-                & ~filters.edited
-                & ~filters.private)
+@app.on_message(
+    (
+        filters.command("report")
+        | filters.command(["admins", "admin"], prefixes="@")
+    )
+    & ~filters.edited
+    & ~filters.private
+)
 @capture_err
 async def report_user(_, message):
     if not message.reply_to_message:
         return await message.reply_text(
-          "Reply to a message to report that user."
+            "Reply to a message to report that user."
         )
- 
+
     if message.reply_to_message.from_user.id == message.from_user.id:
         return await message.reply_text("Why are you reporting yourself ?")
 
     list_of_admins = await list_admins(message.chat.id)
     if message.reply_to_message.from_user.id in list_of_admins:
         return await message.reply_text(
-          "Do you know that the user you are replying is an admin ?"
+            "Do you know that the user you are replying is an admin ?"
         )
- 
+
     user_mention = message.reply_to_message.from_user.mention
     text = f"Reported {user_mention} to admins!"
-    admin_data = await app.get_chat_members(chat_id=message.chat.id,
-                                            filter="administrators") # will it giv floods ?
+    admin_data = await app.get_chat_members(
+        chat_id=message.chat.id, filter="administrators"
+    )  # will it giv floods ?
     for admin in admin_data:
         if admin.user.is_bot or admin.user.is_deleted:
             # return bots or deleted admins
