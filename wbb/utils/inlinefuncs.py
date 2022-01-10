@@ -51,8 +51,7 @@ from wbb.utils.pastebin import paste
 keywords_list = [
     "image",
     "wall",
-    "tmdb",
-    "lyrics",
+    "tmdb",    
     "exec",
     "speedtest",
     "search",
@@ -63,9 +62,7 @@ keywords_list = [
     "info",
     "google",
     "torrent",
-    "wiki",
-    "music",
-    "ytmusic",
+    "wiki",    
 ]
 
 
