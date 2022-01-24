@@ -1,4 +1,5 @@
 from asyncio import gather, sleep
+import html, json, requests
 
 from pyrogram import filters
 from pyrogram.types import Message
@@ -20,14 +21,14 @@ async def chat_bot_toggle(db, message: Message):
     status = message.text.split(None, 1)[1].lower()
     chat_id = message.chat.id
     if status == "enable":
-        if chat_id not in db:
-            db.append(chat_id)
+        if chat_id in db:
+            db.remove(chat_id)
             text = "Chatbot Enabled!"
             return await eor(message, text=text)
         await eor(message, text="ChatBot Is Already Enabled.")
     elif status == "disable":
-        if chat_id in db:
-            db.remove(chat_id)
+        if chat_id not in db:
+            db.append(chat_id)
             return await eor(message, text="Chatbot Disabled!")
         await eor(message, text="ChatBot Is Already Disabled.")
     else:
@@ -44,23 +45,6 @@ async def chatbot_status(_, message: Message):
         return await eor(message, text="**Usage:**\n/chatbot [ENABLE|DISABLE]")
     await chat_bot_toggle(active_chats_bot, message)
 
-
-async def lunaQuery(query: str, user_id: int):
-    luna = await arq.luna(query, user_id)
-    return luna.result
-
-
-async def type_and_send(message: Message):
-    chat_id = message.chat.id
-    user_id = message.from_user.id if message.from_user else 0
-    query = message.text.strip()
-    await message._client.send_chat_action(chat_id, "typing")
-    response, _ = await gather(lunaQuery(query, user_id), sleep(3))
-    if "error" not in response.lower():
-        await message.reply_text(response)
-    await message._client.send_chat_action(chat_id, "cancel")
-
-
 @app.on_message(
     filters.text
     & filters.reply
@@ -71,7 +55,7 @@ async def type_and_send(message: Message):
 )
 @capture_err
 async def chatbot_talk(_, message: Message):
-    if message.chat.id not in active_chats_bot:
+    if message.chat.id in active_chats_bot:
         return
     if not message.reply_to_message:
         return
@@ -79,4 +63,38 @@ async def chatbot_talk(_, message: Message):
         return
     if message.reply_to_message.from_user.id != BOT_ID:
         return
-    await type_and_send(message)
+    await send_message(message)
+
+@app.on_message(
+    filters.text
+    & ~filters.reply
+    & ~filters.bot
+    & ~filters.via_bot
+    & ~filters.forwarded,
+    group=chatbot_group,
+)
+@capture_err
+async def chatbot_talk_on_name(_, message: Message):
+    if message.chat.id in active_chats_bot:
+        return
+    if not message.reply_to_message:
+        return
+    if not message.reply_to_message.from_user:
+        return
+    if message.reply_to_message.from_user.id != BOT_ID:
+        return
+    text = message.text.strip().lower()
+    if "yukino" or "yukinon" or "yukinoshita" in text:
+        await send_message(message)
+
+async def send_message(message):
+    try:        
+        app.send_chat_action(message.chat.id, action="typing")
+        text = message.text
+        kukiurl = requests.get('https://kukiapi.up.railway.app/Kuki/chatbot?message='+text)
+        Kuki = json.loads(kukiurl.text)
+        kuki = Kuki['reply']
+        sleep(0.3)
+        message.reply_text(kuki, timeout=60)
+    except Exception:
+        pass
