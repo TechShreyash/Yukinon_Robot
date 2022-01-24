@@ -154,107 +154,113 @@ keyboard = InlineKeyboardMarkup(
 
 @app.on_message(filters.command("start"))
 async def start(_, message):
-    # groups and user info in start
+    try:
+        # groups and user info in start
 
-    served_chats = len(await get_served_chats())
-    served_users = len(await get_served_users())
-    bot_uptime = int(time.time() - bot_start_time)
-    
-    home_text_private = home_text_pm
+        served_chats = len(await get_served_chats())
+        served_users = len(await get_served_users())
+        bot_uptime = int(time.time() - bot_start_time)
+        
+        home_text_private = home_text_pm
 
-    home_text_private = home_text_private.format(first_name=message.from_user.first_name,
-    uptime_time = formatter.get_readable_time((bot_uptime)),
-    total_users = served_users,
-    number_of_chats = served_chats,
-    )
-
-    #end
-
-
-    #do not edit this    
-    if message.chat.type != "private":
-        return await message.reply("Hello, Yukinon is here to help you[.](https://telegra.ph/file/b82294bc019ef0a9d4a59.jpg)", reply_markup=keyboard,parse_mode="markdown",disable_web_page_preview=False
+        home_text_private = home_text_private.format(first_name=message.from_user.first_name,
+        uptime_time = formatter.get_readable_time((bot_uptime)),
+        total_users = served_users,
+        number_of_chats = served_chats,
         )
-    if len(message.text.split()) > 1:
-        name = (message.text.split(None, 1)[1]).lower()
-        if name == "mkdwn_help":
-            await message.reply(
-                MARKDOWN, parse_mode="html", disable_web_page_preview=True
+
+        #end
+
+
+        #do not edit this    
+        if message.chat.type != "private":
+            return await message.reply("Hello, Yukinon is here to help you[.](https://telegra.ph/file/b82294bc019ef0a9d4a59.jpg)", reply_markup=keyboard,parse_mode="markdown",disable_web_page_preview=False
             )
-        elif "_" in name:
-            module = name.split("_", 1)[1]
-            text = (
-                f"Here is the help for **{HELPABLE[module].__MODULE__}**:\n"
-                + HELPABLE[module].__HELP__
+        if len(message.text.split()) > 1:
+            name = (message.text.split(None, 1)[1]).lower()
+            if name == "mkdwn_help":
+                await message.reply(
+                    MARKDOWN, parse_mode="html", disable_web_page_preview=True
+                )
+            elif "_" in name:
+                module = name.split("_", 1)[1]
+                text = (
+                    f"Here is the help for **{HELPABLE[module].__MODULE__}**:\n"
+                    + HELPABLE[module].__HELP__
+                )
+                await message.reply(text, disable_web_page_preview=True)
+            elif name == "help":
+                text, keyb = await help_parser(message.from_user.first_name)
+                await message.reply(
+                    text,
+                    reply_markup=keyb,
+                )
+        else:
+            await message.reply_photo(photo=thumbnail1,caption=home_text_private,
+                reply_markup=home_keyboard_pm,parse_mode="markdown",
             )
-            await message.reply(text, disable_web_page_preview=True)
-        elif name == "help":
-            text, keyb = await help_parser(message.from_user.first_name)
-            await message.reply(
-                text,
-                reply_markup=keyb,
-            )
-    else:
-        await message.reply_photo(photo=thumbnail1,caption=home_text_private,
-            reply_markup=home_keyboard_pm,parse_mode="markdown",
-        )
-    return
+        return
+    except Exception:
+        pass
 
 
 @app.on_message(filters.command("help"))
 async def help_command(_, message):
-    if message.chat.type != "private":
-        if len(message.command) >= 2:
-            name = (message.text.split(None, 1)[1]).replace(' ', '_').lower()
-            if str(name) in HELPABLE:
-                key = InlineKeyboardMarkup(
-                    [
+    try:
+        if message.chat.type != "private":
+            if len(message.command) >= 2:
+                name = (message.text.split(None, 1)[1]).replace(' ', '_').lower()
+                if str(name) in HELPABLE:
+                    key = InlineKeyboardMarkup(
                         [
-                            InlineKeyboardButton(
-                                text="Click here",
-                                url=f"t.me/{BOT_USERNAME}?start=help_{name}",
-                            )
-                        ],
-                    ]
-                )
-                await message.reply(
-                    f"Click on the below button to get help about {name}",
-                    reply_markup=key,
-                )
+                            [
+                                InlineKeyboardButton(
+                                    text="Click here",
+                                    url=f"t.me/{BOT_USERNAME}?start=help_{name}",
+                                )
+                            ],
+                        ]
+                    )
+                    await message.reply(
+                        f"Click on the below button to get help about {name}",
+                        reply_markup=key,
+                    )
+                else:
+                    await message.reply(
+                        "Hello, Yukinon is here to help you[.](https://telegra.ph/file/b82294bc019ef0a9d4a59.jpg)", reply_markup=keyboard,parse_mode="markdown",disable_web_page_preview=False
+                    )
             else:
                 await message.reply(
                     "Hello, Yukinon is here to help you[.](https://telegra.ph/file/b82294bc019ef0a9d4a59.jpg)", reply_markup=keyboard,parse_mode="markdown",disable_web_page_preview=False
                 )
         else:
-            await message.reply(
-                "Hello, Yukinon is here to help you[.](https://telegra.ph/file/b82294bc019ef0a9d4a59.jpg)", reply_markup=keyboard,parse_mode="markdown",disable_web_page_preview=False
-            )
-    else:
-        if len(message.command) >= 2:
-            name = (message.text.split(None, 1)[1]).replace(' ', '_').lower()
-            if str(name) in HELPABLE:
-                text = (
-                    f"Here is the help for **{HELPABLE[name].__MODULE__}**:\n"
-                    + HELPABLE[name].__HELP__
-                )
-                await message.reply(text, disable_web_page_preview=True)
+            if len(message.command) >= 2:
+                name = (message.text.split(None, 1)[1]).replace(' ', '_').lower()
+                if str(name) in HELPABLE:
+                    text = (
+                        f"Here is the help for **{HELPABLE[name].__MODULE__}**:\n"
+                        + HELPABLE[name].__HELP__
+                    )
+                    await message.reply(text, disable_web_page_preview=True)
+                else:
+                    text, help_keyboard = await help_parser(
+                        message.from_user.first_name
+                    )
+                    await message.reply(
+                        text,
+                        reply_markup=help_keyboard,
+                        disable_web_page_preview=True,
+                    )
             else:
                 text, help_keyboard = await help_parser(
                     message.from_user.first_name
                 )
                 await message.reply(
-                    text,
-                    reply_markup=help_keyboard,
-                    disable_web_page_preview=True,
+                    text, reply_markup=help_keyboard, disable_web_page_preview=True
                 )
-        else:
-            text, help_keyboard = await help_parser(
-                message.from_user.first_name
-            )
-            await message.reply(
-                text, reply_markup=help_keyboard, disable_web_page_preview=True
-            )
-    return
+        return
+    except Exception:
+        pass
 
 
 async def help_parser(name, keyboard=None):

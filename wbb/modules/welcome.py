@@ -222,7 +222,6 @@ from wbb.utils.dbfunctions import (is_captcha_on,)
 import random
 
 @app.on_message(filters.new_chat_members)
-@capture_err
 async def send_defaultwelcome(client,message:Message):    
     if not await is_captcha_on(message.chat.id):
         welcome_msg = random.choice(DEFAULT_WELCOME_MESSAGES)
@@ -230,7 +229,10 @@ async def send_defaultwelcome(client,message:Message):
         if "{first}" in welcome_msg:
             welcome_msg = welcome_msg.replace("{first}", message.from_user.first_name)
 
-        await app.send_message(message.chat.id,text=welcome_msg,reply_to_message_id=message.message_id)
+        try:
+            await app.send_message(message.chat.id,text=welcome_msg,reply_to_message_id=message.message_id)
+        except Exception:
+            pass
 
 @app.on_message(filters.left_chat_member)
 @capture_err
@@ -240,4 +242,7 @@ async def send_defaultgoodbye(client,message:Message):
     if "{first}" in goodbye_msg:
         goodbye_msg = goodbye_msg.replace("{first}", message.from_user.first_name)
 
-    await app.send_message(message.chat.id,text=goodbye_msg,reply_to_message_id=message.message_id)
+    try:
+        await app.send_message(message.chat.id,text=goodbye_msg,reply_to_message_id=message.message_id)
+    except Exception:
+            pass
