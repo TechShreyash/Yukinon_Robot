@@ -55,7 +55,7 @@ async def chatbot_status(_, message: Message):
 )
 @capture_err
 async def chatbot_talk(_, message: Message):
-    if message.chat.id in active_chats_bot:
+    if message.chat.id not in active_chats_bot:
         return
     if not message.reply_to_message:
         return
@@ -75,7 +75,7 @@ async def chatbot_talk(_, message: Message):
 )
 @capture_err
 async def chatbot_talk_on_name(_, message: Message):
-    if message.chat.id in active_chats_bot:
+    if message.chat.id not in active_chats_bot:
         return
     if not message.reply_to_message:
         return
