@@ -1,4 +1,5 @@
 from asyncio import gather, sleep
+import asyncio
 import html, json, requests
 
 from pyrogram import filters
@@ -14,8 +15,6 @@ __HELP__ = """
 """
 
 active_chats_bot = []
-active_chats_ubot = []
-
 
 async def chat_bot_toggle(db, message: Message):
     status = message.text.split(None, 1)[1].lower()
@@ -93,8 +92,8 @@ async def send_message(message):
         text = message.text
         kukiurl = requests.get('https://kukiapi.up.railway.app/Kuki/chatbot?message='+text)
         Kuki = json.loads(kukiurl.text)
-        kuki = Kuki['reply']
-        sleep(0.3)
+        kuki = Kuki['reply']        
+        await asyncio.sleep(0.3)
         message.reply_text(kuki, timeout=60)
     except Exception:
         pass
