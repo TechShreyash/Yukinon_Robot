@@ -127,21 +127,17 @@ async def reverse_image_search(client, message: Message):
                 img = img.get("data-src")
                 media.append(img)
 
-        # Cache images, so we can use file_ids
-        tasks = [client.send_photo(MESSAGE_DUMP_CHAT, img) for img in media]
-        messages = await gather(*tasks)
-
         await message.reply_media_group(
             [
                 InputMediaPhoto(
-                    i.photo.file_id,
+                    img,
                     caption=text,
                 )
-                for i in messages
+                for img in media
             ]
         )
-    except Exception:
-        pass
+    except Exception as e:
+        print(e)
 
     await m.edit(
         text,

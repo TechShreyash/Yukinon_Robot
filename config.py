@@ -12,7 +12,7 @@ API_HASH = "853cae451f8091db916cd9ad395bbf12"
 SUDO_USERS_ID = [
     1906005317,
     1693701096,
-    1577304873,
+    1868831269,
     1791795037,
 ]  # Sudo users have full access to everything, don't trust anyone
 LOG_GROUP_ID = -1001615868326

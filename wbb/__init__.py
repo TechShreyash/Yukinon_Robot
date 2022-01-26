@@ -11,8 +11,6 @@ from pyromod import listen
 from Python_ARQ import ARQ
 from telegraph import Telegraph
 
-is_config = path.exists("config.py")
-
 from config import *
 
 GBAN_LOG_GROUP_ID = GBAN_LOG_GROUP_ID
