@@ -74,6 +74,6 @@ async def send_message(message):
         Kuki = json.loads(kukiurl.text)
         kuki = Kuki['reply']        
         await asyncio.sleep(0.3)
-        message.reply_text(kuki, timeout=60)
+        await message.reply_text(kuki)
     except Exception as e:
         print(e)
