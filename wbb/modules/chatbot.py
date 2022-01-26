@@ -43,8 +43,7 @@ async def chatbot_status(_, message: Message):
     await chat_bot_toggle(message)
 
 @app.on_message(
-    filters.text
-    & filters.reply
+    filters.text    
     & ~filters.bot
     & ~filters.via_bot
     & ~filters.forwarded,
@@ -53,7 +52,10 @@ async def chatbot_status(_, message: Message):
 @capture_err
 async def chatbot_talk(_, message: Message):
     try:
-        if not await is_chatbot_on(message.chat.id):            
+        if not await is_chatbot_on(message.chat.id):
+            text = message.text.strip().lower()
+            if "yukino" or "yukinon" or "yukinoshita" in text:
+                return await send_message(message)            
             if not message.reply_to_message:
                 return
             if not message.reply_to_message.from_user:
@@ -61,30 +63,6 @@ async def chatbot_talk(_, message: Message):
             if message.reply_to_message.from_user.id != BOT_ID:
                 return
             await send_message(message)
-    except Exception as e:
-        print(e)
-
-@app.on_message(
-    filters.text
-    & ~filters.reply
-    & ~filters.bot
-    & ~filters.via_bot
-    & ~filters.forwarded,
-    group=chatbot_group,
-)
-@capture_err
-async def chatbot_talk_on_name(_, message: Message):
-    try:
-        if not await is_chatbot_on(message.chat.id):            
-            if not message.reply_to_message:
-                return
-            if not message.reply_to_message.from_user:
-                return
-            if message.reply_to_message.from_user.id != BOT_ID:
-                return
-            text = message.text.strip().lower()
-            if "yukino" or "yukinon" or "yukinoshita" in text:
-                await send_message(message)
     except Exception as e:
         print(e)
 
