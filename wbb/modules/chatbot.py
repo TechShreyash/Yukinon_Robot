@@ -25,9 +25,13 @@ I will talk with you when you reply to my message or call me by my name.
 async def chatbot_talk(_, message: Message):
     try:        
         text = message.text.strip().lower()
-        if "yukino" or "yukinon" or "yukinoshita" in text:
-            await send_message(message)  
-        else:          
+        if "yukino" in text:
+            await send_message(message)
+        elif "yukinon" in text:
+            await send_message(message)
+        elif "yukinoshita" in text:
+            await send_message(message)
+        else:                     
             if not message.reply_to_message:
                 return
             if not message.reply_to_message.from_user:
