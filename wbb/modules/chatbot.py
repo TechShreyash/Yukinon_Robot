@@ -63,6 +63,8 @@ async def chatbot_talk(_, message: Message):
             if message.reply_to_message.from_user.id != BOT_ID:
                 return
             await send_message(message)
+        else:
+            print("fuk u")
     except Exception as e:
         print(e)
 
