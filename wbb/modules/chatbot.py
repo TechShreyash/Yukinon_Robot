@@ -90,7 +90,7 @@ async def chatbot_talk_on_name(_, message: Message):
 
 async def send_message(message):
     try:        
-        app.send_chat_action(message.chat.id, action="typing")
+        await app.send_chat_action(message.chat.id, action="typing")
         text = message.text
         kukiurl = requests.get('https://kukiapi.up.railway.app/Kuki/chatbot?message='+text)
         Kuki = json.loads(kukiurl.text)
