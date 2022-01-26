@@ -31,6 +31,7 @@ blacklist_chatdb = db.blacklistChat
 restart_stagedb = db.restart_stage
 flood_toggle_db = db.flood_toggle
 rssdb = db.rss
+chatbotdb = db.chatbot
 
 
 def obj_to_str(obj):
@@ -754,3 +755,26 @@ async def get_rss_feeds_count() -> int:
     feeds = rssdb.find({"chat_id": {"$exists": 1}})
     feeds = await feeds.to_list(length=10000000)
     return len(feeds)
+
+
+# chatbot db function
+
+async def is_chatbot_on(chat_id: int) -> bool:
+    chat = await chatbotdb.find_one({"chat_id": chat_id})
+    if not chat:
+        return False
+    return True
+
+
+async def chatbot_on(chat_id: int):
+    is_chatbot = await is_captcha_on(chat_id)
+    if is_chatbot:
+        return
+    return await chatbotdb.insert_one({"chat_id": chat_id})
+
+
+async def chatbot_off(chat_id: int):
+    is_chatbot = await is_captcha_on(chat_id)
+    if not is_chatbot:
+        return
+    return await chatbotdb.delete_one({"chat_id": chat_id})

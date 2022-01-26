@@ -8,6 +8,7 @@ from pyrogram.types import Message
 from wbb import (BOT_ID, SUDOERS, app, arq, eor)
 from wbb.core.decorators.errors import capture_err
 from wbb.utils.filter_groups import chatbot_group
+from wbb.utils.dbfunctions import is_chatbot_on, chatbot_on, chatbot_off
 
 __MODULE__ = "ChatBot 💭"
 __HELP__ = """
@@ -16,20 +17,17 @@ __HELP__ = """
 
 active_chats_bot = []
 
-async def chat_bot_toggle(db, message: Message):
+async def chat_bot_toggle(message: Message):
     status = message.text.split(None, 1)[1].lower()
     chat_id = message.chat.id
     if status == "enable":
-        if chat_id in db:
-            db.remove(chat_id)
-            text = "Chatbot Enabled!"
-            return await eor(message, text=text)
-        await eor(message, text="ChatBot Is Already Enabled.")
+        await chatbot_on(chat_id)
+        text = "Chatbot Enabled!"
+        await eor(message, text=text)        
     elif status == "disable":
-        if chat_id not in db:
-            db.append(chat_id)
-            return await eor(message, text="Chatbot Disabled!")
-        await eor(message, text="ChatBot Is Already Disabled.")
+        await chatbot_on(chat_id)
+        text = "Chatbot Disabled!"
+        await eor(message, text=text)
     else:
         await eor(message, text="**Usage:**\n/chatbot [ENABLE|DISABLE]")
 
@@ -42,7 +40,7 @@ async def chat_bot_toggle(db, message: Message):
 async def chatbot_status(_, message: Message):
     if len(message.command) != 2:
         return await eor(message, text="**Usage:**\n/chatbot [ENABLE|DISABLE]")
-    await chat_bot_toggle(active_chats_bot, message)
+    await chat_bot_toggle(message)
 
 @app.on_message(
     filters.text
@@ -54,15 +52,17 @@ async def chatbot_status(_, message: Message):
 )
 @capture_err
 async def chatbot_talk(_, message: Message):
-    if message.chat.id not in active_chats_bot:
-        return
-    if not message.reply_to_message:
-        return
-    if not message.reply_to_message.from_user:
-        return
-    if message.reply_to_message.from_user.id != BOT_ID:
-        return
-    await send_message(message)
+    try:
+        if not await is_chatbot_on(message.chat.id):            
+            if not message.reply_to_message:
+                return
+            if not message.reply_to_message.from_user:
+                return
+            if message.reply_to_message.from_user.id != BOT_ID:
+                return
+            await send_message(message)
+    except Exception as e:
+        print(e)
 
 @app.on_message(
     filters.text
@@ -74,17 +74,19 @@ async def chatbot_talk(_, message: Message):
 )
 @capture_err
 async def chatbot_talk_on_name(_, message: Message):
-    if message.chat.id not in active_chats_bot:
-        return
-    if not message.reply_to_message:
-        return
-    if not message.reply_to_message.from_user:
-        return
-    if message.reply_to_message.from_user.id != BOT_ID:
-        return
-    text = message.text.strip().lower()
-    if "yukino" or "yukinon" or "yukinoshita" in text:
-        await send_message(message)
+    try:
+        if not await is_chatbot_on(message.chat.id):            
+            if not message.reply_to_message:
+                return
+            if not message.reply_to_message.from_user:
+                return
+            if message.reply_to_message.from_user.id != BOT_ID:
+                return
+            text = message.text.strip().lower()
+            if "yukino" or "yukinon" or "yukinoshita" in text:
+                await send_message(message)
+    except Exception as e:
+        print(e)
 
 async def send_message(message):
     try:        
@@ -95,5 +97,5 @@ async def send_message(message):
         kuki = Kuki['reply']        
         await asyncio.sleep(0.3)
         message.reply_text(kuki, timeout=60)
-    except Exception:
-        pass
+    except Exception as e:
+        print(e)
