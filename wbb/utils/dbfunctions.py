@@ -767,14 +767,14 @@ async def is_chatbot_on(chat_id: int) -> bool:
 
 
 async def chatbot_on(chat_id: int):
-    is_chatbot = await is_captcha_on(chat_id)
-    if is_chatbot:
+    if not await is_chatbot_on(chat_id):
         return
-    return await chatbotdb.insert_one({"chat_id": chat_id})
+    else:
+        await chatbotdb.delete_one({"chat_id": chat_id})
 
 
 async def chatbot_off(chat_id: int):
-    is_chatbot = await is_captcha_on(chat_id)
-    if not is_chatbot:
+    if not await is_chatbot_on(chat_id):
+        await chatbotdb.insert_one({"chat_id": chat_id})
+    else:
         return
-    return await chatbotdb.delete_one({"chat_id": chat_id})
