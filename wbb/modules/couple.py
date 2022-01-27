@@ -78,6 +78,5 @@ __New couple of the day may be chosen at 12AM {tomorrow}__"""
             await app.send_message(
                 message.chat.id, text=couple_selection_message
             )
-    except Exception as e:
-        print(e)
-        await message.reply_text(e)
+    except Exception:        
+        await message.reply_text("Something went wrong, Please try again /couples")
