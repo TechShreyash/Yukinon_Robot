@@ -79,38 +79,45 @@ async def reverse_image_search(client, message: Message):
         )
 
     # Pass if no images detected
-    
-    url = "https://google.com" + soup.find_all(
-        "a", {"class": "ekf0x hSQtef"}
-    )[0].get("href")
-    soup = await get_soup(url, headers=headers)
-    media = []
-    for img in soup.find_all("img"):
-        if len(media) == 2:
-            break
-        if img.get("src"):
-            img = img.get("src")
-            if "image/gif" in img:
-                continue
-            img = BytesIO(b64decode(img))
-            img.name = "img.png"
-            media.append(img)
-        elif img.get("data-src"):
-            img = img.get("data-src")
-            media.append(img)
-    # Cache images, so we can use file_ids
-    tasks = [app.send_photo(MESSAGE_DUMP_CHAT, img) for img in media]
-    messages = await gather(*tasks)
-    await message.reply_media_group(
-        [
-            InputMediaPhoto(
-                i.photo.file_id,
-                caption=text,
-            )
-            for i in messages
-        ]
-    )
-    
+    try:
+        url = "https://google.com" + soup.find_all(
+            "a", {"class": "ekf0x hSQtef"}
+        )[0].get("href")
+
+        soup = await get_soup(url, headers=headers)
+
+        media = []
+        for img in soup.find_all("img"):
+            if len(media) == 2:
+                break
+
+            if img.get("src"):
+                img = img.get("src")
+                if "image/gif" in img:
+                    continue
+
+                img = BytesIO(b64decode(img))
+                img.name = "img.png"
+                media.append(img)
+            elif img.get("data-src"):
+                img = img.get("data-src")
+                media.append(img)
+
+        # Cache images, so we can use file_ids
+        tasks = [app.send_photo(MESSAGE_DUMP_CHAT, img) for img in media]
+        messages = await gather(*tasks)
+
+        await message.reply_media_group(
+            [
+                InputMediaPhoto(
+                    i.photo.file_id,
+                    caption=text,
+                )
+                for i in messages
+            ]
+        )
+    except Exception:
+        pass
 
     await m.edit(
         text,
