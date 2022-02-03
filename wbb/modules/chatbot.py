@@ -59,8 +59,10 @@ async def send_message(message):
         cblang = await check_cblang(message.chat.id)
         if cblang == "en":
             text = await translator_cb(kuki,"en")
+            await asyncio.sleep(0.3)
             await message.reply_text(text)
         else:            
+            await asyncio.sleep(0.3)
             await message.reply_text(kuki)
     except Exception as e:
         print(e)
