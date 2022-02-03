@@ -79,7 +79,7 @@ async def translator_cb(text,lang):
 @capture_err
 async def cblang_command(_, message):
     text = message.text
-    lang = text.replace("cblang"," ")
+    lang = text.replace("/cblang"," ")
     lang = lang.strip()
 
     if lang == "en":
