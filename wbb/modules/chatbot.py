@@ -46,7 +46,7 @@ async def send_message(message):
     try:        
         await app.send_chat_action(message.chat.id, action="typing")
         text = message.text
-        kukiurl = requests.get('https://kukiapi.up.railway.app/Kuki/chatbot?message='+text)
+        kukiurl = requests.get('https://www.kukiapi.xyz/api/yukino/shreyash/message='+text)
         Kuki = json.loads(kukiurl.text)
         kuki = Kuki['reply']        
         await asyncio.sleep(0.3)
