@@ -772,7 +772,7 @@ async def set_cblang(chat_id: int,lang):
             return "set hi to en"
     elif lang == "hi":
         if cblang == "none":
-            await cbenlang.insert_one({"chat_id": chat_id})
+            await cbhilang.insert_one({"chat_id": chat_id})
             return "set hi"        
         elif cblang == "hi":
             await cbenlang.delete_one({"chat_id": chat_id})
