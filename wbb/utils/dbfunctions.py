@@ -2,6 +2,8 @@ import codecs
 import pickle
 from typing import Dict, List, Union
 
+from telegram import chat
+
 from wbb import db
 
 # SOME THINGS ARE FUCKED UP HERE, LIKE TOGGLEABLES HAVE THEIR OWN COLLECTION
@@ -31,6 +33,8 @@ blacklist_chatdb = db.blacklistChat
 restart_stagedb = db.restart_stage
 flood_toggle_db = db.flood_toggle
 rssdb = db.rss
+cbenlang = db.cblang
+cbhilang = db.cblang
 
 
 def obj_to_str(obj):
@@ -754,3 +758,45 @@ async def get_rss_feeds_count() -> int:
     feeds = rssdb.find({"chat_id": {"$exists": 1}})
     feeds = await feeds.to_list(length=10000000)
     return len(feeds)
+
+# chatbot db
+
+async def set_cblang(chat_id: int,lang): 
+    cblang = await check_cblang(chat_id) 
+
+    if lang == "en":
+        if cblang == "none":
+            await cbenlang.insert_one({"chat_id": chat_id})
+            return "set en"
+        elif cblang == "en":
+            await cbhilang.delete_one({"chat_id": chat_id})
+            await cbenlang.insert_one({"chat_id": chat_id})
+            return "set hi to en"
+    elif lang == "hi":
+        if cblang == "none":
+            await cbenlang.insert_one({"chat_id": chat_id})
+            return "set hi"        
+        elif cblang == "hi":
+            await cbenlang.delete_one({"chat_id": chat_id})
+            await cbhilang.insert_one({"chat_id": chat_id})
+            return "set en to hi"
+    elif lang == "off":
+        if cblang == "none":            
+            return "not set"
+        elif cblang == "en":
+            await cbenlang.delete_one({"chat_id": chat_id})            
+            return "del"        
+        elif cblang == "hi":
+            await cbhilang.delete_one({"chat_id": chat_id})            
+            return "del"
+
+async def check_cblang(chat_id):
+    user = await cbenlang.find_one({"chat_id": chat_id})
+    if not user:
+        user = await cbhilang.find_one({"chat_id": chat_id})
+        if not user:        
+            return "none"
+        else:
+            return "hi"
+    else:
+        return "en"

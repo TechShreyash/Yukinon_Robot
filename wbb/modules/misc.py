@@ -196,9 +196,13 @@ async def random(_, message):
 @app.on_message(filters.command("tr") & ~filters.edited)
 @capture_err
 async def tr(_, message):
-    if len(message.command) != 2:
+    if len(message.command) > 2:
         return await message.reply_text("/tr [LANGUAGE_CODE]")
-    lang = message.text.split(None, 1)[1]
+    elif len(message.command) < 2:
+        lang = "en"
+    else:
+        lang = message.text.split(None, 1)[1]
+        
     if not message.reply_to_message or not lang:
         return await message.reply_text(
             "Reply to a message with /tr [language code]"

@@ -4,14 +4,21 @@ import html, json, requests
 
 from pyrogram import filters
 from pyrogram.types import Message
+from utils.dbfunctions import check_cblang, set_cblang
 
-from wbb import (BOT_ID,app)
+from wbb import (BOT_ID,app,arq)
 from wbb.core.decorators.errors import capture_err
 from wbb.utils.filter_groups import chatbot_group
 
 __MODULE__ = "ChatBot 💭"
 __HELP__ = f"""
 I will talk with you when you reply to my message or call me by my name.
+
+**Chatbot Dafult Language:**
+
+`/cblang en` - set default language to english
+`/cblang hi` - set default language to hindi
+`/cblang off` - To turn off chatbot default language
 """
 
 @app.on_message(
@@ -48,8 +55,56 @@ async def send_message(message):
         text = message.text
         kukiurl = requests.get('https://www.kukiapi.xyz/api/yukino/shreyash/message='+text)
         Kuki = json.loads(kukiurl.text)
-        kuki = Kuki['reply']        
-        await asyncio.sleep(0.3)
-        await message.reply_text(kuki)
+        kuki = Kuki['reply']
+
+        cblang = await check_cblang(message.chat.id)
+        if cblang == "en":
+            text = await translator_cb(kuki,"en")
+            await asyncio.sleep(0.3)
+            await message.reply_text(text)
+        elif cblang == "hi":
+            text = await translator_cb(kuki,"hi")
+            await asyncio.sleep(0.3)
+            await message.reply_text(text)
+        else:       
+            await asyncio.sleep(0.3)
+            await message.reply_text(kuki)
     except Exception as e:
         print(e)
+
+async def translator_cb(text,lang):
+    result = await arq.translate(text, lang)
+    if not result.ok:
+        return "error"
+    return result.result.translatedText
+
+@app.on_message(filters.command("cblang") & ~filters.edited)
+@capture_err
+async def cblang_command(_, message):
+    if len(message.command) > 2:
+        return await message.reply_text("**Usage:**\n\n`/cblang en` **Or**\n`/cblang hi`\n__To set chatbot deafult language to english or hindi.__\n\n`/cblang off` - To turn off chatbot default language")    
+    else:
+        lang = message.text.split(None, 1)[1]
+
+        if lang == "en":
+            pass
+        elif lang == "hi":
+            pass
+        elif lang == "off":
+            pass 
+        else:
+            return await message.reply_text("**Usage:**\n\n`/cblang en` **Or**\n`/cblang hi`\n__To set chatbot deafult language to english or hindi.__\n\n`/cblang off` - To turn off chatbot default language")
+
+    return_data = await set_cblang(message.chat.id,lang)
+    if return_data == "set en":
+        return await message.reply_text("✅ Succefully set chatbot language to English.")
+    elif return_data == "set hi to en":
+        return await message.reply_text("✅ Succefully updated chatbot language from Hindi to English.")
+    elif return_data == "set hi":
+        return await message.reply_text("✅ Succefully set chatbot language to Hindi.")
+    elif return_data == "set en to hi":
+        return await message.reply_text("✅ Succefully updated chatbot language from English to Hindi.")
+    elif return_data == "not set":
+        return await message.reply_text("❌ Chatbot Defalut Is Not. Why even trying to remove you stupid.")
+    elif return_data == "del":
+        return await message.reply_text("✅ Turned Off Chatbot Dafult Language.")
