@@ -4,7 +4,7 @@ import html, json, requests
 
 from pyrogram import filters
 from pyrogram.types import Message
-from utils.dbfunctions import check_cblang, set_cblang
+from wbb.utils.dbfunctions import check_cblang, set_cblang
 
 from wbb import (BOT_ID,app,arq)
 from wbb.core.decorators.errors import capture_err
