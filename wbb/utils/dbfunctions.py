@@ -31,8 +31,8 @@ blacklist_chatdb = db.blacklistChat
 restart_stagedb = db.restart_stage
 flood_toggle_db = db.flood_toggle
 rssdb = db.rss
-cbenlang = db.cblang
-cbhilang = db.cblang
+cbenlang = db.cbenlang
+cbhilang = db.cbhilang
 
 
 def obj_to_str(obj):
