@@ -32,7 +32,6 @@ restart_stagedb = db.restart_stage
 flood_toggle_db = db.flood_toggle
 rssdb = db.rss
 cbenlang = db.cbenlang
-cbhilang = db.cbhilang
 
 
 def obj_to_str(obj):
@@ -763,38 +762,18 @@ async def set_cblang(chat_id: int,lang):
     cblang = await check_cblang(chat_id) 
 
     if lang == "en":
-        if cblang == "none":
-            await cbenlang.insert_one({"chat_id": chat_id})
-            return "set en"
-        elif cblang == "en":
-            await cbhilang.delete_one({"chat_id": chat_id})
-            await cbenlang.insert_one({"chat_id": chat_id})
-            return "set hi to en"
-    elif lang == "hi":
-        if cblang == "none":
-            await cbhilang.insert_one({"chat_id": chat_id})
-            return "set hi"        
-        elif cblang == "hi":
-            await cbenlang.delete_one({"chat_id": chat_id})
-            await cbhilang.insert_one({"chat_id": chat_id})
-            return "set en to hi"
+        await cbenlang.insert_one({"chat_id": chat_id})
+        return "set en"           
     elif lang == "off":
         if cblang == "none":            
             return "not set"
         elif cblang == "en":
             await cbenlang.delete_one({"chat_id": chat_id})            
             return "del"        
-        elif cblang == "hi":
-            await cbhilang.delete_one({"chat_id": chat_id})            
-            return "del"
 
 async def check_cblang(chat_id):
     user = await cbenlang.find_one({"chat_id": chat_id})
     if not user:
-        user = await cbhilang.find_one({"chat_id": chat_id})
-        if not user:        
-            return "none"
-        else:
-            return "hi"
+        return "none"        
     else:
         return "en"

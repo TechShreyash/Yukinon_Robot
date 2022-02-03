@@ -17,7 +17,6 @@ I will talk with you when you reply to my message or call me by my name.
 **Chatbot Dafult Language:**
 
 `/cblang en` - set default language to english
-`/cblang hi` - set default language to hindi
 `/cblang off` - To turn off chatbot default language
 """
 
@@ -61,9 +60,6 @@ async def send_message(message):
         if cblang == "en":
             text = await translator_cb(kuki,"en")
             await message.reply_text(text)
-        elif cblang == "hi":
-            text = await translator_cb(kuki,"hi")            
-            await message.reply_text(text)
         else:            
             await message.reply_text(kuki)
     except Exception as e:
@@ -83,22 +79,14 @@ async def cblang_command(_, message):
     lang = lang.strip()
 
     if lang == "en":
-        return_data = await set_cblang(message.chat.id,"en")
-    elif lang == "hi":
-        return_data = await set_cblang(message.chat.id,"hi")
+        return_data = await set_cblang(message.chat.id,"en")    
     elif lang == "off":
         return_data = await set_cblang(message.chat.id,"off") 
     else:
-        return await message.reply_text("**Usage:**\n\n`/cblang en` **Or**\n`/cblang hi`\n__To set chatbot deafult language to english or hindi.__\n\n`/cblang off` - To turn off chatbot default language")
+        return await message.reply_text("**Usage:**\n\n`/cblang en` - To set chatbot default language to english\n`/cblang off` - To turn off chatbot default language")
 
     if return_data == "set en":
         return await message.reply_text("✅ Succefully set chatbot language to English.")
-    elif return_data == "set hi to en":
-        return await message.reply_text("✅ Succefully updated chatbot language from Hindi to English.")
-    elif return_data == "set hi":
-        return await message.reply_text("✅ Succefully set chatbot language to Hindi.")
-    elif return_data == "set en to hi":
-        return await message.reply_text("✅ Succefully updated chatbot language from English to Hindi.")
     elif return_data == "not set":
         return await message.reply_text("❌ Chatbot Defalut Is Not. Why even trying to remove you stupid.")
     elif return_data == "del":
