@@ -2,8 +2,6 @@ import codecs
 import pickle
 from typing import Dict, List, Union
 
-from telegram import chat
-
 from wbb import db
 
 # SOME THINGS ARE FUCKED UP HERE, LIKE TOGGLEABLES HAVE THEIR OWN COLLECTION
