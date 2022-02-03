@@ -60,14 +60,11 @@ async def send_message(message):
         cblang = await check_cblang(message.chat.id)
         if cblang == "en":
             text = await translator_cb(kuki,"en")
-            await asyncio.sleep(0.3)
             await message.reply_text(text)
         elif cblang == "hi":
-            text = await translator_cb(kuki,"hi")
-            await asyncio.sleep(0.3)
+            text = await translator_cb(kuki,"hi")            
             await message.reply_text(text)
-        else:       
-            await asyncio.sleep(0.3)
+        else:            
             await message.reply_text(kuki)
     except Exception as e:
         print(e)
@@ -81,21 +78,19 @@ async def translator_cb(text,lang):
 @app.on_message(filters.command("cblang") & ~filters.edited)
 @capture_err
 async def cblang_command(_, message):
-    if len(message.command) > 2:
-        return await message.reply_text("**Usage:**\n\n`/cblang en` **Or**\n`/cblang hi`\n__To set chatbot deafult language to english or hindi.__\n\n`/cblang off` - To turn off chatbot default language")    
+    text = message.text
+    lang = text.replace("cblang"," ")
+    lang = lang.strip()
+
+    if lang == "en":
+        return_data = await set_cblang(message.chat.id,"en")
+    elif lang == "hi":
+        return_data = await set_cblang(message.chat.id,"hi")
+    elif lang == "off":
+        return_data = await set_cblang(message.chat.id,"off") 
     else:
-        lang = message.text.split(None, 1)[1]
+        return await message.reply_text("**Usage:**\n\n`/cblang en` **Or**\n`/cblang hi`\n__To set chatbot deafult language to english or hindi.__\n\n`/cblang off` - To turn off chatbot default language")
 
-        if lang == "en":
-            pass
-        elif lang == "hi":
-            pass
-        elif lang == "off":
-            pass 
-        else:
-            return await message.reply_text("**Usage:**\n\n`/cblang en` **Or**\n`/cblang hi`\n__To set chatbot deafult language to english or hindi.__\n\n`/cblang off` - To turn off chatbot default language")
-
-    return_data = await set_cblang(message.chat.id,lang)
     if return_data == "set en":
         return await message.reply_text("✅ Succefully set chatbot language to English.")
     elif return_data == "set hi to en":
