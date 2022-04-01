@@ -3,10 +3,10 @@ from dotenv import load_dotenv
 load_dotenv("config.env")
 
 HEROKU = (
-    False  # NOTE Make it false if you're not deploying on heroku or docker.
+    True  # NOTE Make it false if you're not deploying on heroku or docker.
 )
 
-BOT_TOKEN = "5064215617:AAH7cc824W-cRtjdmsEi-VaIfjTmM0U9gRI"
+BOT_TOKEN = "5064215617:AAE8O15hr_emblE_j5tBpJVbs-qTErmQanE"
 API_ID = 2344247
 API_HASH = "853cae451f8091db916cd9ad395bbf12"
 SUDO_USERS_ID = [
