@@ -52,7 +52,7 @@ async def send_message(message):
     try:        
         await app.send_chat_action(message.chat.id, action="typing")
         text = message.text
-        kukiurl = requests.get('https://www.kukiapi.xyz/api/yukino/shreyash/message='+text)
+        kukiurl = requests.get('https://www.kukiapi.xyz/api/apikey=1906005317-KUKIRt5ZXB4mi3/Yukinon/TechShreyash/message='+text)
         Kuki = json.loads(kukiurl.text)
         kuki = Kuki['reply']
 
