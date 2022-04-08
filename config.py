@@ -14,6 +14,9 @@ SUDO_USERS_ID = [
     1693701096,
     1868831269,
     1791795037,
+    1242979521,
+    1791795037,
+    5239506592
 ]  # Sudo users have full access to everything, don't trust anyone
 LOG_GROUP_ID = -1001615868326
 GBAN_LOG_GROUP_ID = -1001615868326
