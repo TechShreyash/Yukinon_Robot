@@ -6,7 +6,7 @@ HEROKU = (
     True  # NOTE Make it false if you're not deploying on heroku or docker.
 )
 
-BOT_TOKEN = "5064215617:AAGjwM_a6Y_kLNiCy9w5Gt3BQg-uT6hlvMo"
+BOT_TOKEN = "5064215617:AAE2O4gqRqaxDLpKWye_dLtb_e0wNeptynI"
 API_ID = 2344247
 API_HASH = "853cae451f8091db916cd9ad395bbf12"
 SUDO_USERS_ID = [
