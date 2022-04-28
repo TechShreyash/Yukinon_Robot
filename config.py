@@ -24,7 +24,7 @@ MESSAGE_DUMP_CHAT = -1001704010414
 WELCOME_DELAY_KICK_SEC = 600
 MONGO_URL = "mongodb+srv://yukino:yukinon@cluster0.vrlpf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 ARQ_API_KEY = "KBSFBD-AJYHUP-NUFRSH-BFNHZY-ARQ"
-ARQ_API_URL = "https://thearq.tech"
+ARQ_API_URL = "https://arq.hamker.in"
 LOG_MENTIONS = True
 RSS_DELAY = 600  # In seconds
 PM_PERMIT = True
