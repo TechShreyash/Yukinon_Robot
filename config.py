@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 load_dotenv("config.env")
 
 HEROKU = (
-    True  # NOTE Make it false if you're not deploying on heroku or docker.
+    False  # NOTE Make it false if you're not deploying on heroku or docker.
 )
 
 BOT_TOKEN = "5064215617:AAE2O4gqRqaxDLpKWye_dLtb_e0wNeptynI"
