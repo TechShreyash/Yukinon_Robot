@@ -1,0 +1,67 @@
+{
+    "name": "Telegram group manager rose bot",
+    "description": "szrose is an all in one group management bot made for managing your group effectively with some advance security tools & Suit For All Your Needs ❤️",
+    "repository": "https://github.com/szsupunma/sz-rosebot",
+    "logo": "https://telegra.ph/file/38d48fa6ce357927d6d12.jpg",
+    "keywords": [
+    "python3",
+    "telegram",
+    "bot",
+    "mongodb",
+    "Group-Manager-bot",
+    "pyrogram"
+    ],
+    "website": "https://szrosebot.ml",
+    "success_url": "https://t.me/szrosebot",
+    "stack": "container",
+    "env": {
+        "BOT_TOKEN": {
+            "description": "Telegram bot token get it from  @BotFather",
+            "required": true
+        },
+        "API_ID": {
+            "description": "API_ID of your Telegram Account my.telegram.org/apps",
+            "required": true
+        },
+        "API_HASH": {
+            "description": "API_HASH of your Telegram Account my.telegram.org/apps",
+            "required": true
+        },
+        "API_ID1": {
+            "description": "Same as API_ID (multi-client)",
+            "required": true
+        },
+        "API_HASH1": {
+            "description": "Same as API_HASH (multi-client)",
+            "required": true
+        },
+        "LOG_GROUP_ID": {
+            "description": "For logs channel to note down important bot level events, recommend to make this public. ex: '-123456'",
+            "required": true
+        },
+        "MONGO_URL": {
+            "description": "Get From Here.https://www.mongodb.com/",
+            "required": true
+        },
+        "BASE_DB": {
+            "description": "Get From Here.https://www.mongodb.com/ (Same as MONGO_URL but give differant value for this) ",
+            "required": true
+        },
+        "ARQ_API_URL": {
+            "description": "Don't change this value",
+            "value": "https://arq.hamker.in",
+            "required": true
+        },
+        "ARQ_API_KEY": {
+            "description": "Get this from @ARQRobot.",
+            "required": true
+        },
+        "COMMAND_PREFIXES": {
+            "description": "now you can set custom command handler for rose like : / ! ,",
+            "required": true
+        }
+    }
+}
+
+
+
