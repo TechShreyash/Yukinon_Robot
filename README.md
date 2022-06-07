@@ -1,5 +1,5 @@
 <p align="center">
-      <img style="width:100px; height:100px;"  src="https://telegra.ph/file/25b6defb51b244cfa4cb4.jpg"></p>
+      <img style="width:100px; height:100px;"  src="https://telegra.ph/file/25b6defb51b244cfa4cb4.png"></p>
 <h1 align="center"><b>Yukinon Robot ✨</b></h1>
 <h2 align="center"><b>A Telegram Bot to manage and protect groups</b></h2>
 <h4 align="center">Yukinon Robot simplifies the management, administration and security of your group</h4>
