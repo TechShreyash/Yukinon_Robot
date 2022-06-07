@@ -1,8 +1,8 @@
 <p align="center">
-      <img style="width:100px; height: 100px;"  src="https://telegra.ph/file/c823fea618f6c024e75a9.png"></p>
-<h1 align="center"><b>Rose bot ✨</b></h1>
-<h2 align="center"><b>The Telegram Bot to manage and protect groups</b></h2>
-<h4 align="center">Rose bot  simplifies the management, administration and security of your group</h4>
+      <img style="width:100%;"  src="https://telegra.ph/file/afcb0aec07dec8c37fa01.jpg"></p>
+<h1 align="center"><b>Yukinon Robot ✨</b></h1>
+<h2 align="center"><b>A Telegram Bot to manage and protect groups</b></h2>
+<h4 align="center">Yukinon Robot simplifies the management, administration and security of your group</h4>
 
 <p align="center">
     <img src="https://img.shields.io/github/license/szsupunma/sz-rosebot?style=for-the-badge&logo=appveyor" alt="LICENSE">
