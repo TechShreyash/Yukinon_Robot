@@ -14,11 +14,11 @@
 
 ## What is Yukinon for ?
 
-Have you ever received Telegram in your group **spam, adder, flood,** people who send link, channel message, promoting, arabic ? Rose Bot is the automatic moderator that manages your Telegram group and punishes malicious users automatically for you.
+Have you ever received Telegram in your group **spam, adder, flood,** people who send link, channel message, promoting, arabic ? Yukinon Robot is the automatic moderator that manages your Telegram group and punishes malicious users automatically for you.
 
 ## How does She work?
 
-Just add Rose Bot to your group as an administrator and configure it with the command /help. It will be ready to protect the your group from spam, flood and attacks. You can set banned words so that the ban or mute of a user in the group when sent.
+Just add Yukinon Robot to your group as an administrator and configure it with the command /help. It will be ready to protect the your group from spam, flood and attacks. You can set banned words so that the ban or mute of a user in the group when sent.
 There is an anti-porn filter to be enabled to automatically delete and punish those who send pornographic content in your group.
 You can adjust all kinds of punishments including message deletion, user ban, user mute etc. There is a captcha check to prevent the entry of VoIP users who automatically spam your group. You can set <b> filters|note|rules|welcome </b> message also for your group.
 
@@ -40,7 +40,7 @@ You can adjust all kinds of punishments including message deletion, user ban, us
 ### MANAGEMENT  
    * **Welcome message** - Set a message to be sent every time a user joins your Telegram group.
    * **Group regulation** - The /rules command allows users to easily consult the rules of your group.
-   * **Group Filters** - Filters are case insensitive; every time someone says your trigger words, Rose will reply something else! can be used to create your own commands, if desired.
+   * **Group Filters** - Filters are case insensitive; every time someone says your trigger words, Yukinon will reply something else! can be used to create your own commands, if desired.
    * **Group Notes** - Notes are great to save random tidbits of information; a phone number, a nice gif, a funny picture - anything!
    * **Connection Mode** - This allows you to connect to a chat's database, and add things to it without the chat knowing about it! For obvious reasons, you need to be an admin to add things; but any member can view your data. (banned/kicked users can't!)
    * **Admin Commands** - Make it easy to promote and demote users with the admin module!
@@ -69,7 +69,7 @@ If you want to make your bot even more unique, you can create a customized Yukin
  - [Documentation](https://szsupunma.gitbook.io/rose-bot/)
 
 [![License](https://www.gnu.org/graphics/agplv3-155x51.png)](LICENSE)   
-Rose is licensed under [GNU Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.en.html) v3 or later.
+Yukinon is licensed under [GNU Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.en.html) v3 or later.
 
 ## Credits
 [szsupunma](https://github.com/szsupunma) for [sz-rosebot](https://github.com/szsupunma/sz-rosebot)
