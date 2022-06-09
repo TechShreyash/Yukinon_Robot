@@ -52,7 +52,7 @@ Maybe not enough to make them admin, but you might be ok with locks, blocklists,
 That's what approvals are for - approve of trustworthy users to allow them to send 
 
 # Start protecting your group now!
-Getting started protecting and managing your group better with Rose Bot is very simple: [Click Here](http://telegram.me/Yukinon_Robot?startgroup=new) to add the bot to the group, then set it as administrator and send the command /help to manage the bot at 360° in all its functions and automations.
+Getting started protecting and managing your group better with Yukinon Robot is very simple: [Click Here](http://telegram.me/Yukinon_Robot?startgroup=new) to add the bot to the group, then set it as administrator and send the command /help to manage the bot at 360° in all its functions and automations.
 
 ## Deploy Your Own Yukinon Robot - Create a clone (Deploy To Heroku)
 If you want to make your bot even more unique, you can create a customized Yukinon Robot clone with a name and profile photo of your choice.
@@ -63,19 +63,17 @@ If you want to make your bot even more unique, you can create a customized Yukin
 
 ## Contact & Support Chats
 
- - [Updates Channel](https://t.me/TechZBots)
  - [Owner](https://t.me/TechShreyash)
+ - [Updates Channel](https://t.me/TechZBots)
  - [Support Group](https://t.me/TechZBots_Support)
  - [Documentation](https://szsupunma.gitbook.io/rose-bot/)
 
 [![License](https://www.gnu.org/graphics/agplv3-155x51.png)](LICENSE)   
 Rose is licensed under [GNU Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.en.html) v3 or later.
 
-## Special Credits
-Special thanks to these amazing projects/people which/who help power Rose bot
-### [click Here](https://szsupunma.gitbook.io/rose-bot/getting-started/credits)
+## Credits
+[szsupunma](https://github.com/szsupunma) for [sz-rosebot](https://github.com/szsupunma/sz-rosebot)
 
 ## Contributions
 #### Contributions are welcome.
-
-![Contributors](https://contrib.rocks/image?repo=szsupunma/sz-rosebot)
+![Contributors](https://contrib.rocks/image?repo=TechShreyash/Yukinon_Robot)
