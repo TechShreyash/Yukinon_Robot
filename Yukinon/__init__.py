@@ -12,7 +12,7 @@ from config import *
 import pymongo
 
 
-SUPPORT_GROUP = "https://t.me/slbotzone"
+SUPPORT_GROUP = "https://t.me/TechZBots_Support"
 SUDOERS = SUDO_USERS_ID
 LOG_GROUP_ID = LOG_GROUP_ID
 MOD_LOAD = []
@@ -20,24 +20,23 @@ MOD_NOLOAD = []
 bot_start_time = time.time()
 DB_URI = BASE_DB 
 MONGO_URL = MONGO_URL
-OWNER_ID = 1467358214
+OWNER_ID = 1906005317
 
 
 myclient = pymongo.MongoClient(DB_URI)
-dbn = myclient["supun"]
+dbn = myclient["yukinon"]
 
 mongo_client = AsyncIOMotorClient(MONGO_URL)
-db = mongo_client.wbb
+db = mongo_client.yukinon
 
 
 loop = asyncio.get_event_loop()
 aiohttpsession = ClientSession()
 arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
 
-bot = Client("supun", bot_token=BOT_TOKEN, api_id=API_ID, api_hash=API_HASH)
-bot.start()
-app = Client("app2", bot_token=BOT_TOKEN, api_id=API_ID1, api_hash=API_HASH1)
+app = Client("yukinon", bot_token=BOT_TOKEN, api_id=API_ID, api_hash=API_HASH)
 app.start()
+bot = app
 
 x = app.get_me()
 

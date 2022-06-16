@@ -26,14 +26,6 @@
             "description": "API_HASH of your Telegram Account my.telegram.org/apps",
             "required": true
         },
-        "API_ID1": {
-            "description": "Same as API_ID (multi-client)",
-            "required": true
-        },
-        "API_HASH1": {
-            "description": "Same as API_HASH (multi-client)",
-            "required": true
-        },
         "LOG_GROUP_ID": {
             "description": "For logs channel to note down important bot level events, recommend to make this public. ex: '-123456'",
             "required": true
