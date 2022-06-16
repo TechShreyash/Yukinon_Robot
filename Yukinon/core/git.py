@@ -7,9 +7,6 @@ from git.exc import GitCommandError, InvalidGitRepositoryError
 
 import config
 
-UPSTREAM_REPO = "https://github.com/TechShreyash/Yukinon_Robot"
-UPSTREAM_BRANCH = "main"
-
 def install_req(cmd: str) -> Tuple[str, str, int, int]:
     async def install_requirements():
         args = shlex.split(cmd)
@@ -32,6 +29,8 @@ def install_req(cmd: str) -> Tuple[str, str, int, int]:
 
 
 def git():
+    UPSTREAM_REPO = "https://github.com/TechShreyash/Yukinon_Robot"
+    UPSTREAM_BRANCH = "main"
     REPO_LINK = UPSTREAM_REPO
     if config.GIT_TOKEN:
         GIT_USERNAME = REPO_LINK.split("com/")[1].split("/")[0]
