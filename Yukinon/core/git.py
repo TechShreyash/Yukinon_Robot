@@ -5,8 +5,6 @@ from typing import Tuple
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError
 
-import config
-
 def install_req(cmd: str) -> Tuple[str, str, int, int]:
     async def install_requirements():
         args = shlex.split(cmd)
