@@ -1,1 +1,1 @@
-worker: python3 -m Yukinon
+worker: bash start
