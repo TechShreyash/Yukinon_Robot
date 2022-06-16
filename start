@@ -1,1 +1,1 @@
-git pull && python -m Yukinon
+python -m Yukinon

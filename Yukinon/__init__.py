@@ -11,6 +11,8 @@ from pyrogram import Client
 from config import *
 import pymongo
 
+from Yukinon.core.git import git
+git()
 
 SUPPORT_GROUP = "https://t.me/TechZBots_Support"
 SUDOERS = SUDO_USERS_ID
