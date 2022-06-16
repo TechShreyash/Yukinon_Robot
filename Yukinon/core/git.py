@@ -7,8 +7,6 @@ from git.exc import GitCommandError, InvalidGitRepositoryError
 
 import config
 
-from ..logging import LOGGER
-
 UPSTREAM_REPO = "https://github.com/TechShreyash/Yukinon_Robot"
 UPSTREAM_BRANCH = "main"
 
@@ -45,9 +43,9 @@ def git():
         UPSTREAM_REPO = UPSTREAM_REPO
     try:
         repo = Repo()
-        LOGGER(__name__).info(f"Git Client Found [VPS DEPLOYER]")
+        print(f"Git Client Found [VPS DEPLOYER]")
     except GitCommandError:
-        LOGGER(__name__).info(f"Invalid Git Command")
+        print(f"Invalid Git Command")
     except InvalidGitRepositoryError:
         repo = Repo.init()
         if "origin" in repo.remotes:
@@ -74,4 +72,4 @@ def git():
         except GitCommandError:
             repo.git.reset("--hard", "FETCH_HEAD")
         install_req("pip3 install --no-cache-dir -r requirements.txt")
-        LOGGER(__name__).info(f"Fetched Updates from: {REPO_LINK}")
+        print(f"Fetched Updates from: {REPO_LINK}")
