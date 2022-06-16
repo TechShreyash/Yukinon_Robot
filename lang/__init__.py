@@ -5,7 +5,7 @@ languages = {}
 commands = {}
 
 def get_command(value: str) -> List:
-    return commands["command"][value]
+    return commands["en"][value]
 
 def get_string(lang: str):
     return languages["en"]
