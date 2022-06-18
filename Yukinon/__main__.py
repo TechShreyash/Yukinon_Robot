@@ -62,8 +62,8 @@ async def start_bot():
 
         else:
             await app.send_message(LOG_GROUP_ID, "Bot started!")
-    except Exception:
-        pass
+    except Exception as e:
+        print(e)
     print(f"{all_module}")
     print("""
  _____________________________________________   

@@ -24,7 +24,7 @@ MOD_NOLOAD = []
 bot_start_time = time.time()
 DB_URI = BASE_DB 
 MONGO_URL = MONGO_URL
-OWNER_ID = 
+OWNER_ID = OWNER_ID
 
 
 myclient = pymongo.MongoClient(DB_URI)
@@ -39,6 +39,7 @@ aiohttpsession = ClientSession()
 arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
 
 app = Client("yukinon", bot_token=BOT_TOKEN, api_id=API_ID, api_hash=API_HASH)
+print("INFO: Starting Yukinon Robot")
 app.start()
 bot = app
 
