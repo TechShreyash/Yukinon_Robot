@@ -14,7 +14,9 @@ import pymongo
 from Yukinon.core.git import git
 git()
 
+UPDATES_CHANNEL = "https://t.me/TechZBots"
 SUPPORT_GROUP = "https://t.me/TechZBots_Support"
+
 SUDOERS = SUDO_USERS_ID
 LOG_GROUP_ID = LOG_GROUP_ID
 MOD_LOAD = []
@@ -22,7 +24,7 @@ MOD_NOLOAD = []
 bot_start_time = time.time()
 DB_URI = BASE_DB 
 MONGO_URL = MONGO_URL
-OWNER_ID = 1906005317
+OWNER_ID = 
 
 
 myclient = pymongo.MongoClient(DB_URI)

@@ -1,5 +1,5 @@
 Admin = "Admin"
-formatting = "formatting"
+formatting = "Formatting"
 F_sub = "F-Sub"
 Approval = "Approval"
 Restrict = "Restrict"

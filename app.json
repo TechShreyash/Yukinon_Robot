@@ -2,9 +2,10 @@
     "name": "Yukinon Robot",
     "description": "Advanced Telegram Group Management Bot made for managing your group effectively with some advance security tools & Suit For All Your Needs ❤️",
     "repository": "https://github.com/TechShreyash/Yukinon_Robot",
-    "logo": "https://telegra.ph/file/38d48fa6ce357927d6d12.jpg",
+    "logo": "https://telegra.ph/file/444b2604da3866b52768f.jpg",
     "keywords": [
     "python3",
+    "yukinon"
     "telegram",
     "bot",
     "mongodb",
@@ -34,10 +35,6 @@
             "description": "Get From Here.https://www.mongodb.com/",
             "required": true
         },
-        "BASE_DB": {
-            "description": "Get From Here.https://www.mongodb.com/ (Same as MONGO_URL but give differant value for this) ",
-            "required": true
-        },
         "ARQ_API_URL": {
             "description": "Don't change this value",
             "value": "https://arq.hamker.in",
@@ -47,12 +44,9 @@
             "description": "Get this from @ARQRobot.",
             "required": true
         },
-        "COMMAND_PREFIXES": {
-            "description": "now you can set custom command handler for Yukinon like : / ! ,",
+        "OWNER_ID": {
+            "description": "User ID Of The Owner Of Bot",
             "required": true
         }
     }
 }
-
-
-
