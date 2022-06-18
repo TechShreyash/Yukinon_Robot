@@ -8,6 +8,8 @@ CHANNEL_ID = F_SUB_CHANNEL
 
 
 async def ForceSub(bot: Client, event: Message):
+    if not CHANNEL_ID or CHANNEL_ID == "":
+        return 200
     try:
         await bot.get_chat_member(chat_id=(int(CHANNEL_ID) if CHANNEL_ID.startswith("-100") else CHANNEL_ID), user_id=event.from_user.id)
     except FloodWait as e:
