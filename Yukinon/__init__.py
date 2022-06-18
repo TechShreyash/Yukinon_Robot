@@ -10,9 +10,11 @@ import asyncio
 from pyrogram import Client
 from config import *
 import pymongo
+import os
 
 from Yukinon.core.git import git
 git()
+os.system("git pull")
 
 UPDATES_CHANNEL = "https://t.me/TechZBots"
 SUPPORT_GROUP = "https://t.me/TechZBots_Support"
