@@ -45,12 +45,8 @@ async def start_bot():
     all_module = ""
     j = 1
     for i in ALL_MODULES:
-        if j == 1:
-            all_module += "•≫ Successfully imported:{:<15}.py\n".format(i)
-            j = 0
-        else:
-            all_module += "•≫ Successfully imported:{:<15}.py".format(i)
-        j += 1           
+        all_module = "•≫ Successfully imported:{:<15}.py".format(i)
+        print(all_module)
     restart_data = await clean_restart_stage()
     try:
         if restart_data:
@@ -61,15 +57,15 @@ async def start_bot():
             )
 
         else:
-            await app.send_message(LOG_GROUP_ID, "Bot started!")
+            await app.send_message(LOG_GROUP_ID, "Yukinon Robot started!")
     except Exception as e:
         print(e)
-    print(f"{all_module}")
+    #print(f"{all_module}")
     print("""
  _____________________________________________   
 |                                             |  
 |          Deployed Successfully              |  
-|   (C) 2021-2022 by @TechZBots             |
+|      (C) 2021-2022 by @TechZBots            |
 |_____________________________________________|  
                                                                                                
     """)
